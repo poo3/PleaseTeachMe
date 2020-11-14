@@ -1,29 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Please Teach Me</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
+  <title>Please Teach Me</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-  <body>
-    <header>
-      <div class="containter">
-        <%= link_to image_tag("PleaseTeachMe",alt: "PleaseTeachMe logo",width:"200px",id: "app-logo"), root_path %>
-        <nav>
-          <ul class="nav">
-            <li><%= link_to "Home", root_path %></li>
-            <li><%= link_to 'help', static_pages_help_path %></li>
-            <li><%= link_to 'contact', static_pages_contact_path %></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-    <div class="main-container">
-      <%= yield %>
-    </div>
-  </body>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <%= render 'layouts/header'%>
+  <div class="main-container">
+    <%= yield %>
+  </div>
+</body>
+
 </html>

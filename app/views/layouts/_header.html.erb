@@ -1,0 +1,16 @@
+<header>
+  <div class="header-wrapper">
+    <div class="app-logo-container">
+      <%= link_to image_tag("PleaseTeachMe",alt: "PleaseTeachMe logo",width:"200px",id: "app-logo"), root_path %>
+    </div>
+    <nav>
+      <div class="nav-container">
+        <ul class="nav">
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to 'help', static_pages_help_path %></li>
+          <li><%= link_to 'contact', static_pages_contact_path %></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
