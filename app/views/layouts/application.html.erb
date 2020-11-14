@@ -10,7 +10,20 @@
   </head>
 
   <body>
-    <%= link_to image_tag("PleaseTeachMe",alt: "PleaseTeachMe logo",width:"200px"), root_path %>
-    <%= yield %>
+    <header>
+      <div class="containter">
+        <%= link_to image_tag("PleaseTeachMe",alt: "PleaseTeachMe logo",width:"200px",id: "app-logo"), root_path %>
+        <nav>
+          <ul class="nav">
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to 'help', static_pages_help_path %></li>
+            <li><%= link_to 'contact', static_pages_contact_path %></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="main-container">
+      <%= yield %>
+    </div>
   </body>
 </html>
