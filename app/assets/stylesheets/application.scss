@@ -24,7 +24,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 
 @import "reset";
 
-
+// header
 .header-wrapper {
   height: 15vh;
   display: flex;
@@ -60,5 +60,43 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
     justify-content: center;
     align-items: center;
     width: 40%;
+  }
+}
+
+// footer
+.footer-wrapper{
+  height: 15vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  > .copy-right-container{
+    width: 40%;
+    display: flex;
+    align-items: center;
+  }
+  > .sns-container{
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    > div {
+      text-align: right;
+      width: 30%;
+    }
+    > ul {
+      width: 40%;
+      list-style: none;
+      > li {
+        float: right;
+        width: 22%;
+        text-align: right;
+        > a {
+          > .sns-icon {
+            font-size: 1.5em;
+            color: #880016;
+          }
+        }
+      }
+    }
   }
 }
