@@ -13,14 +13,14 @@
  *= require_tree .
  *= require_self
  */
- // application.scssの冒頭に以下の記述を追記
+// application.scssの冒頭に以下の記述を追記
 
-$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
-@import '@fortawesome/fontawesome-free/scss/fontawesome';
-@import '@fortawesome/fontawesome-free/scss/solid';
-@import '@fortawesome/fontawesome-free/scss/regular';
-@import '@fortawesome/fontawesome-free/scss/brands';
-@import '@fortawesome/fontawesome-free/scss/v4-shims';
+$fa-font-path: "@fortawesome/fontawesome-free/webfonts";
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "@fortawesome/fontawesome-free/scss/regular";
+@import "@fortawesome/fontawesome-free/scss/brands";
+@import "@fortawesome/fontawesome-free/scss/v4-shims";
 
 @import "reset";
 
@@ -64,17 +64,17 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 }
 
 // footer
-.footer-wrapper{
+.footer-wrapper {
   height: 15vh;
   width: 100%;
   display: flex;
   justify-content: space-around;
-  > .copy-right-container{
+  > .copy-right-container {
     width: 40%;
     display: flex;
     align-items: center;
   }
-  > .sns-container{
+  > .sns-container {
     width: 40%;
     display: flex;
     justify-content: flex-end;
