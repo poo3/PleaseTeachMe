@@ -64,5 +64,11 @@ RSpec.describe User, type: :model do
     expect(duplicate_user).to_not be_valid
   end
 
-  
+  #メールアドレスが小文字で保存されているかのテスト
+  it "has downcase email when email saved" do
+    mixed_case_email = "Foo@ExamPle.CoM"
+    @user.email = mixed_case_email
+    @user.save
+    expect(mixed_case_email.downcase).to eq(@user.reload.email)
+  end
 end
