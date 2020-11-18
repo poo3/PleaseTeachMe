@@ -59,10 +59,10 @@ RSpec.describe User, type: :model do
   #重複するメールアドレスは登録できないようになっているかテスト(大文字、小文字関係なし)
   it "has unique email address" do
     duplicate_user = @user.dup
-    duplicate_user.email = @user.email.upcase
     @user.save
     duplicate_user.valid?
     expect(duplicate_user).to_not be_valid
   end
 
+  
 end
