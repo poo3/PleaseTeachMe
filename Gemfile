@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
+#ハッシュ関数を使用する為のGem
+gem 'bcrypt', '3.1.13'
 #アプリケーション名をリネームする為のGem
 gem 'rename'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -35,6 +37,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.7'
   gem 'factory_bot_rails', '~> 4.11'
+  gem 'rubocop', require: false
 end
 
 group :development do
