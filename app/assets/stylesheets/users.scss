@@ -1,3 +1,45 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+/* forms */
+
+h1{
+  text-align: center;
+  margin: 40px 0;
+}
+
+.form-box {
+  width: 100%;
+  @include box_sizing();
+  border: 2px solid #0cc4e8;
+  border-radius: 20px;
+  padding: 0 6px;
+  height: auto !important;
+  margin-bottom: 40px;
+}
+
+.user-form-container{
+  width: 50%;
+  margin: 0 auto;
+  >form {
+    > .btn-submit{
+      width: 30%;
+      background-color: #0cc4e8;
+      color: white;
+      text-align: center;
+      display: block;
+      margin: 60px auto 100px auto;
+    }
+  }
+
+  
+  
+}
