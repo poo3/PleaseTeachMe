@@ -16,4 +16,18 @@ RSpec.describe "UsersSignupTests", type: :system do
     end
   end
 
+  context "有効な情報を入力し新規登録を実施する" do
+    scenario "有効な情報で新規登録をする" do
+      visit new_user_path
+      fill_in 'user_name', with: 'poo3'
+      fill_in 'user_email', with: 'example@example.com'
+      fill_in 'user_password', with: 'test1234test1234'
+      fill_in 'user_password_confirmation', with: 'test1234test1234'
+      click_button '新規登録をする！'
+      #作成したユーザの詳細ページにリダイレクトしているか確認
+      expect(current_path).to eq user_path(User.first.id)
+      expect(page).to have_selector 'div.alert-success'
+    end
+  end
+
 end
