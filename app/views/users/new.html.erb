@@ -1,2 +1,19 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<h1>Sign up</h1>
+
+<div class="user-form-wrapper">
+  <div class="user-form-container">
+    <%= form_with(model: @user, local: true) do |f| %>
+      <%= render 'shared/error_messages'%>
+
+      <%= f.text_field :name, class: 'form-box', placeholder: "名前を入力してください"%>
+
+      <%= f.email_field :email, class: "form-box", placeholder: "メールアドレス"%>
+
+      <%= f.password_field :password, class: "form-box", placeholder: "パスワード"%>
+
+      <%= f.password_field :password_confirmation, class: "form-box", placeholder: "パスワード再入力"%>
+      
+      <%= f.submit "新規登録をする！", class: "btn btn-submit"%>
+    <% end %>
+  </div>
+</div>
