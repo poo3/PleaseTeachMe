@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       #ログイン成功の処理を実装
     else
-      flash[:danger] = 'ログインできませんでした正しい情報を入力してください'
+      flash.now[:danger] = 'ログインできませんでした正しい情報を入力してください'
       render 'new'
     end
   end
