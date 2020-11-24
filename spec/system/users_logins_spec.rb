@@ -19,14 +19,13 @@ RSpec.describe "UsersLogins", type: :system do
   context "有効な情報でユーザログインする時" do
     before do
       #ユーザを作成する
-      User.create!(name: 'test_user',email: 'example@test.co.jp',password: 'test1234567890',
-                  password_confirmation: 'test1234567890')
+      @test_user = FactoryBot.create(:user)
     end
     scenario "ログインする" do
       visit login_path
       expect(page).to have_content 'Log in'
-      fill_in 'session_email', with: 'example@test.co.jp'
-      fill_in 'session_password', with: 'test1234567890'
+      fill_in 'session_email', with: @test_user.email
+      fill_in 'session_password', with: @test_user.password
       click_button 'ログイン'
       #ログイン後ユーザ詳細画面へリダイレクトしているか確認
       expect(page).to have_content 'ログアウト'
@@ -37,13 +36,12 @@ RSpec.describe "UsersLogins", type: :system do
   context "ユーザがログインしている時" do 
     before do
       #ユーザを作成する
-      User.create!(name: 'test_user',email: 'example@test.co.jp',password: 'test1234567890',
-        password_confirmation: 'test1234567890')
+      test_user = FactoryBot.create(:user)
       #ログインする
       visit login_path
       expect(page).to have_content 'Log in'
-      fill_in 'session_email', with: 'example@test.co.jp'
-      fill_in 'session_password', with: 'test1234567890'
+      fill_in 'session_email', with: test_user.email
+      fill_in 'session_password', with: test_user.password
       click_button 'ログイン'
     end
 
