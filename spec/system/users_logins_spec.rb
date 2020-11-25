@@ -1,19 +1,53 @@
 require 'rails_helper'
 
 RSpec.describe "UsersLogins", type: :system do
-  context '無効な情報でログインする時' do
-    scenario 'ログインする' do
-      visit login_path
-      expect(page).to have_content 'Log in'
-      fill_in 'session_email', with: ''
-      fill_in 'session_password', with: ''
-      click_button 'ログイン'
-      #ログイン後エラーメッセージが表示されているか確認する
-      expect(page).to have_content 'Log in'
-      expect(page).to have_selector 'div.alert-danger'
-      visit root_path
-      expect(page).to_not have_selector 'div.alert'
+  context '無効な情報を含んでログインする時' do
+
+    context 'メールアドレスのみ有効の場合' do
+      scenario 'ログインする' do
+        visit login_path
+        expect(page).to have_content 'Log in'
+        fill_in 'session_email', with: "example@test.co.jp"
+        fill_in 'session_password', with: ''
+        click_button 'ログイン'
+        #ログイン後エラーメッセージが表示されているか確認する
+        expect(page).to have_content 'Log in'
+        expect(page).to have_selector 'div.alert-danger'
+        visit root_path
+        expect(page).to_not have_selector 'div.alert'
+      end
     end
+
+    context 'パスワードのみ有効の場合' do
+      scenario 'ログインする' do
+        visit login_path
+        expect(page).to have_content 'Log in'
+        fill_in 'session_email', with: ""
+        fill_in 'session_password', with: "test1234567890"
+        click_button 'ログイン'
+        #ログイン後エラーメッセージが表示されているか確認する
+        expect(page).to have_content 'Log in'
+        expect(page).to have_selector 'div.alert-danger'
+        visit root_path
+        expect(page).to_not have_selector 'div.alert'
+      end
+    end
+
+    context 'パスワード、メールアドレス両方無効' do
+      scenario 'ログインする' do
+        visit login_path
+        expect(page).to have_content 'Log in'
+        fill_in 'session_email', with: ""
+        fill_in 'session_password', with: ""
+        click_button 'ログイン'
+        #ログイン後エラーメッセージが表示されているか確認する
+        expect(page).to have_content 'Log in'
+        expect(page).to have_selector 'div.alert-danger'
+        visit root_path
+        expect(page).to_not have_selector 'div.alert'
+      end
+    end
+
   end
 
   context "有効な情報でユーザログインする時" do
