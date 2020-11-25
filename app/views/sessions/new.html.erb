@@ -1,0 +1,16 @@
+<h1>Log in</h1>
+
+<div class="user-form-wrapper">
+  <div class="user-form-container">
+    <%= form_with(url:login_path,scope: :session, local: true) do |f| %>
+
+      <%= f.email_field :email, class: "form-box", placeholder: "メールアドレス"%>
+
+      <%= f.password_field :password, class: "form-box", placeholder: "パスワード"%>
+      
+      <%= f.submit "ログイン", class: "btn btn-submit"%>
+    <% end %>
+
+    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+  </div>
+</div>
