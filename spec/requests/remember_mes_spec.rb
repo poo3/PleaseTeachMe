@@ -20,5 +20,6 @@ RSpec.describe "RememberMes", type: :request do
         expect(is_logged_in?).to be false
       end
     end
+
   end
 end
