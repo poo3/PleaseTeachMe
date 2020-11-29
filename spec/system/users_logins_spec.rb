@@ -87,5 +87,44 @@ RSpec.describe "UsersLogins", type: :system do
       expect(page).to have_selector 'div.introduction-app-container'
     end
   end
+
+  feature "remember_me機能" do
+    before do
+      #ユーザを作成する
+      @test_user = FactoryBot.create(:user)
+    end
+
+    scenario "チェクボックスON" do
+      #ログインする
+      visit login_path
+      expect(page).to have_content 'Log in'
+      fill_in 'session_email', with: @test_user.email
+      fill_in 'session_password', with: @test_user.password
+      check 'session_remember_me'
+      expect(page).to have_checked_field('session_remember_me')
+      click_button 'ログイン'
+      #永続クッキー作成されているか確認
+      show_me_the_cookies
+      expect(get_me_the_cookie('remember_token')).to_not eq nil
+      #クッキーがきちんと仕事をするか確認
+      expire_cookies
+      visit root_path
+      expect(page).to have_content 'ログアウト'
+    end
+
+    scenario "チェックボックスOFF" do
+      #ログインする
+      visit login_path
+      expect(page).to have_content 'Log in'
+      fill_in 'session_email', with: @test_user.email
+      fill_in 'session_password', with: @test_user.password
+      expect(page).to have_unchecked_field('session_remember_me')
+      click_button 'ログイン'
+      #永続クッキー作成されていない事を確認
+      show_me_the_cookies
+      expect(get_me_the_cookie('remember_token')).to eq nil
+    end
+  end
+
 end
 
