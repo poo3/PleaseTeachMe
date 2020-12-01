@@ -100,3 +100,17 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
     }
   }
 }
+
+// flash-message
+.alert {
+  text-align: center;
+}
+
+.alert-success{
+  background-color: #0cc4e8;
+  color: aliceblue;
+}
+
+.alert-danger{
+  color: red;
+}
