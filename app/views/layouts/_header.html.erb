@@ -11,6 +11,7 @@
           <li><%= link_to 'contact', static_pages_contact_path %></li>
           <% if logged_in? %>
             <li><%= link_to "ログアウト" , logout_path, method: :delete %></li>
+            <li><%= link_to "登録内容編集", edit_user_path(current_user) %></li>
           <% else %>
             <li><%= link_to "ログイン", login_path %></li>
           <% end %>
