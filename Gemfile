@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
+#デバッグする為のgem
+gem 'pry-rails'
 #ハッシュ関数を使用する為のGem
 gem 'bcrypt', '3.1.13'
 #アプリケーション名をリネームする為のGem
