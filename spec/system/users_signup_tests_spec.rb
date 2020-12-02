@@ -8,10 +8,10 @@ RSpec.describe "UsersSignupTests", type: :system do
       fill_in 'user_email', with: 'user@invalid'
       fill_in 'user_password', with: 'foo'
       fill_in 'user_password_confirmation', with: 'bar'
-      click_button '新規登録をする！'
+      click_button '新規登録'
       #エラーメッセージが描画されている事を検証する
       expect(page).to have_selector 'div.field_with_errors'
-      expect(page).to have_button '新規登録をする！'
+      expect(page).to have_button '新規登録'
       expect(page).to have_selector 'div#error_explanation'
     end
   end
@@ -23,7 +23,7 @@ RSpec.describe "UsersSignupTests", type: :system do
       fill_in 'user_email', with: 'example@example.com'
       fill_in 'user_password', with: 'test1234test1234'
       fill_in 'user_password_confirmation', with: 'test1234test1234'
-      click_button '新規登録をする！'
+      click_button '新規登録'
       #作成したユーザの詳細ページにリダイレクトしているか確認
       expect(current_path).to eq user_path(User.first.id)
       expect(page).to have_selector 'div.alert-success'
