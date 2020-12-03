@@ -69,6 +69,23 @@ RSpec.describe "UsersEdits", type: :system do
   end
 
   feature "自身以外のユーザ情報を編集できないようにする機能" do
-    
+    before do
+      #ユーザを作成する
+      @test_user = FactoryBot.create(:user)
+      #その他のユーザ
+      @other_user = FactoryBot.create(:user,name: "other_test_user",email: "example@other.co.jp")
+      #自身のログイン
+      visit login_path
+      fill_in 'session_email', with: @test_user.email
+      fill_in 'session_password', with: @test_user.password
+      click_button 'ログイン'
+    end
+
+    scenario "違うユーザの編集ページへアクセス" do
+      visit edit_user_path(@other_user)
+      expect(page).to have_selector 'div.introduction-app-container'
+      expect(page).to_not have_selector 'div.alert'
+    end
+
   end
 end
