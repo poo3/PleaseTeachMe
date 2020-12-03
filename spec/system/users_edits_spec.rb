@@ -86,6 +86,21 @@ RSpec.describe "UsersEdits", type: :system do
       expect(page).to have_selector 'div.introduction-app-container'
       expect(page).to_not have_selector 'div.alert'
     end
+  end
 
+  feature "フレンドリーフォワーディング" do
+    before do
+      #ユーザを作成する
+      @test_user = FactoryBot.create(:user)
+    end
+    
+    scenario "ログインする前に編集ページにアクセス" do
+      visit edit_user_path(@test_user)
+      fill_in 'session_email', with: @test_user.email
+      fill_in 'session_password', with: @test_user.password
+      click_button 'ログイン'
+      expect(page).to have_content 'Edit User'
+      expect(page).to_not have_selector 'div.introduction-app-container'
+    end
   end
 end
