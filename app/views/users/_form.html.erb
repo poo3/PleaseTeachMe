@@ -1,0 +1,17 @@
+<div class="user-form-wrapper">
+  <div class="user-form-container">
+    <%= form_with(model: @user, local: true) do |f| %>
+      <%= render 'shared/error_messages'%>
+
+      <%= f.text_field :name, class: 'form-box', placeholder: "名前を入力してください"%>
+
+      <%= f.email_field :email, class: "form-box", placeholder: "メールアドレス"%>
+
+      <%= f.password_field :password, class: "form-box", placeholder: "半角英数字パスワード(8文字以上)"%>
+
+      <%= f.password_field :password_confirmation, class: "form-box", placeholder: "パスワード再入力"%>
+      
+      <%= f.submit params[:id] == nil ? "新規登録" : "編集完了", class: "btn btn-submit"%>
+    <% end %>
+  </div>
+</div>

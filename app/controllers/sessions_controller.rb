@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   def new
-    
   end
 
   def create
@@ -9,7 +8,7 @@ class SessionsController < ApplicationController
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       flash[:success] = 'ログインに成功しました！'
-      redirect_to user
+      redirect_back_or user
     else
       flash.now[:danger] = 'ログインできませんでした正しい情報を入力してください'
       render 'new'
