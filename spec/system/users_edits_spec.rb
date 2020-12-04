@@ -101,6 +101,7 @@ RSpec.describe "UsersEdits", type: :system do
       click_button 'ログイン'
       expect(page).to have_content 'Edit User'
       expect(page).to_not have_selector 'div.introduction-app-container'
+      expect(session[:fowarding_url]).to eq nil
     end
   end
 end
