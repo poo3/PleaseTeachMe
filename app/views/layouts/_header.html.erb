@@ -7,27 +7,30 @@
     </div>
     <nav>
       <div class="nav-container">
-        <ul class="nav">
           <div class="static-pages-nav">
-            <li><%= link_to "Home", root_path %></li>
-            <li><%= link_to 'help', static_pages_help_path %></li>
-            <li><%= link_to 'contact', static_pages_contact_path %></li>
+            <ul class="nav">
+              <li><%= link_to 'ヘルプ', static_pages_help_path %></li>
+              <li><%= link_to 'お問合せ', static_pages_contact_path %></li>
+            </ul>
           </div>
-          <div class="user-nav">
-<%
-=begin
-%>
-            <%if logged_in? %>
-              <li><%= link_to "ログアウト" , logout_path, method: :delete %></li>
-              <li><%= link_to "登録内容編集", edit_user_path(current_user) %></li>
-            <% else %>
-              <li><%= link_to "ログイン", login_path %></li>
-            <%= end %>
-<%
-=end
-%>
+          <div class="user-nav-wrapper">
+            <button type="button">
+              <div>
+                <%= image_tag("user-menu-logo",class: "user-menu-logo")%>
+              </div>
+            </button>
+            <div class="user-nav">
+              <ul>
+                <li><%= link_to '登録する', new_user_path , class: "signup-btn"%></li>
+                <%if logged_in? %>
+                  <li><%= link_to "ログアウト" , logout_path, method: :delete %></li>
+                  <li><%= link_to "登録内容編集", edit_user_path(current_user) %></li>
+                <% else %>
+                  <li><%= link_to "ログイン", login_path %></li>
+                <% end %>
+              </ul>
+            </div>
           </div>
-        </ul>
       </div>
     </nav>
   </div>
