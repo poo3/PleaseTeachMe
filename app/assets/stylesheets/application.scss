@@ -23,43 +23,108 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
 @import "@fortawesome/fontawesome-free/scss/v4-shims";
 
 @import "reset";
+@import "header_background";
+
+// main-contents
+.main-container::before {
+  content: "";
+  width: 100%;
+  height: 15vh;
+  display: block;
+}
 
 // header
 .header-wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
   height: 15vh;
   display: flex;
   justify-content: space-around;
   width: 100%;
-  > nav {
-    width: 40%;
-    > .nav-container {
+  background-image: $back_img;
+  nav {
+    width: 70%;
+    .nav-container {
       width: 100%;
       height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      .nav {
-        list-style: none;
-        width: 100%;
-        overflow: hidden;
-        > li {
-          float: left;
-          text-align: center;
-          width: 30%;
-          > a {
-            text-decoration: none;
-            color: black;
-            font-size: 1.2rem;
+      .static-pages-nav {
+        width: 50%;
+        .nav {
+          list-style: none;
+          width: 100%;
+          overflow: hidden;
+          li {
+            float: left;
+            text-align: left;
+            width: 30%;
+            a {
+              text-decoration: none;
+              font-weight: bold;
+              color: whitesmoke;
+              font-size: 1.2rem;
+            }
+          }
+        }
+      }
+      .user-nav-wrapper {
+        width: 50%;
+        text-align: right;
+        button {
+          margin-right: 100px;
+          background-color: whitesmoke;
+          width: 70px;
+          height: 45px;
+          border-radius: 35px;
+          div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .user-menu-logo {
+              margin: 0 auto;
+            }
+          }
+        }
+        .user-nav {
+          position: absolute;
+          left: 0;
+          width: 100%;
+          display: none;
+          justify-content: flex-end;
+          ul {
+            border-radius: 10px;
+            background-color: white;
+            width: 25%;
+            margin-right: 100px;
+            list-style: none;
+            text-align: left;
+            padding: 10px 0;
+            li {
+              line-height: 3rem;
+              a {
+                display: block;
+                width: 100%;
+                color: black;
+                text-decoration: none;
+                padding-left: 5%;
+              }
+              a:hover {
+                background-color: aliceblue;
+              }
+            }
           }
         }
       }
     }
   }
-  > .app-logo-container {
+  .app-logo-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40%;
+    width: 30%;
   }
 }
 
@@ -69,29 +134,29 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
   width: 100%;
   display: flex;
   justify-content: space-around;
-  > .copy-right-container {
+  .copy-right-container {
     width: 40%;
     display: flex;
     align-items: center;
   }
-  > .sns-container {
+  .sns-container {
     width: 40%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    > div {
+    div {
       text-align: right;
       width: 30%;
     }
-    > ul {
+    ul {
       width: 40%;
       list-style: none;
-      > li {
+      li {
         float: right;
         width: 22%;
         text-align: right;
-        > a {
-          > .sns-icon {
+        a {
+          .sns-icon {
             font-size: 1.5em;
             color: #880016;
           }
@@ -106,11 +171,11 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
   text-align: center;
 }
 
-.alert-success{
+.alert-success {
   background-color: #0cc4e8;
   color: aliceblue;
 }
 
-.alert-danger{
+.alert-danger {
   color: red;
 }
