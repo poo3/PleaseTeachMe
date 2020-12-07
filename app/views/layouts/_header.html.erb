@@ -14,12 +14,12 @@
             </ul>
           </div>
           <div class="user-nav-wrapper">
-            <button type="button">
+            <button id="user-nav-button" type="button">
               <div>
                 <%= image_tag("user-menu-logo",class: "user-menu-logo")%>
               </div>
             </button>
-            <div class="user-nav">
+            <div class="user-nav" id="user-nav">
               <ul>
                 <li><%= link_to '登録する', new_user_path , class: "signup-btn"%></li>
                 <%if logged_in? %>
