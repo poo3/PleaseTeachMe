@@ -16,7 +16,7 @@ class ContactController < ApplicationController
     @contact = Contact.new(contact_params)
     if @contact.save
       ContactMailer.contact_mail(@contact).deliver
-      redirect_to new_contact_path,notice: 'Contact was successfully created.'
+      redirect_to new_contact_path,notice: 'お問い合わせ内容送信しました！'
     end
   end
 
