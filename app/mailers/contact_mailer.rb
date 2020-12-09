@@ -1,5 +1,5 @@
 class ContactMailer < ApplicationMailer
-  default from: 'notifications@example.com'
+  default from: 'pleaseteachme@example.com'
 
   def contact_mail(contact)
     @contact = contact
