@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :contact do
-    name { "MyString" }
-    email { "MyString" }
-    content { "MyText" }
+    name { "test_user" }
+    email { "example@test.co.jp" }
+    content { "MyText test_contact 困っています〜" }
   end
 end
