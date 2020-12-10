@@ -34,6 +34,17 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
+  # GmailのActionMailer設定
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'example.com',
+    user_name:            'applicationtestpoo3@gmail.com',
+    password:             'poo-kuu0808',
+    authentication:       'plain',
+    enable_starttls_auto: true }
+
   #テスト環境でメールをプレビューする為の設定
   host = 'localhost:3000'#ローカル環境
   config.action_mailer.default_url_options = { host: host, protocol: 'http' }
