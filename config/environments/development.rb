@@ -37,12 +37,12 @@ Rails.application.configure do
   # GmailのActionMailer設定
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'example.com',
-    user_name:            'applicationtestpoo3@gmail.com',
-    password:             'poo-kuu0808',
-    authentication:       'plain',
+    address:              Rails.application.credentials.gmail[:address],
+    port:                 Rails.application.credentials.gmail[:port],
+    domain:               Rails.application.credentials.gmail[:domain],
+    user_name:            Rails.application.credentials.gmail[:user_name],
+    password:             Rails.application.credentials.gmail[:password],
+    authentication:       Rails.application.credentials.gmail[:authentication],
     enable_starttls_auto: true }
 
   #テスト環境でメールをプレビューする為の設定
