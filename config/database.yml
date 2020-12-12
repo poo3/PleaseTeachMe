@@ -4,29 +4,33 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 #
+# default: &default
+#   adapter: sqlite3
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   timeout: 5000
+  
 default: &default
-  adapter: sqlite3
+  adapter: mysql2
+  encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  username: <%= Rails.application.credentials.db[:username]%>
+  password: <%= Rails.application.credentials.db[:password]%>
+  socket: /tmp/mysql.sock
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  database: please_teach_me_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/test.sqlite3
+  database: please_teach_me_test
 
 production:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   # For details on connection pooling, see Rails configuration guide
   # https://railsguides.jp/configuring.html#データベース接続をプールする
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  database: sample_app_production
-  username: sample_app
-  password: <%= ENV['SAMPLE_APP_DATABASE_PASSWORD'] %>
+  database: please_teach_me_production
   
