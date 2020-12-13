@@ -62,6 +62,7 @@ RSpec.describe "UsersLogins", type: :system do
       fill_in 'session_password', with: @test_user.password
       click_button 'ログイン'
       #ログイン後ユーザ詳細画面へリダイレクトしているか確認
+      find("#user-nav-button").click
       expect(page).to have_content 'ログアウト'
       expect(page).to have_content 'ログインに成功しました！'
     end
@@ -81,8 +82,10 @@ RSpec.describe "UsersLogins", type: :system do
 
     scenario "ログアウトする" do
       visit root_path
+      find("#user-nav-button").click
       click_link 'ログアウト'
       #ログアウト後にホーム画面に戻っているかチェック
+      find("#user-nav-button").click
       expect(page).to have_content 'ログイン'
       expect(page).to have_selector 'div.introduction-app-container'
     end
@@ -109,6 +112,7 @@ RSpec.describe "UsersLogins", type: :system do
       #クッキーがきちんと仕事をするか確認
       expire_cookies
       visit root_path
+      find("#user-nav-button").click
       expect(page).to have_content 'ログアウト'
     end
 
