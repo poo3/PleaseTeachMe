@@ -29,8 +29,6 @@ test:
   database: please_teach_me_test
 
 production:
-  <<: *default
   # For details on connection pooling, see Rails configuration guide
   # https://railsguides.jp/configuring.html#データベース接続をプールする
-  database: please_teach_me_production
-  
+  url: <%= ENV['DATABASE_URL'] %>  
