@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
+# .env環境変数を使うためのgem
+gem 'dotenv-rails'
 
 gem 'mysql2','0.5.3'
 #ハッシュ関数を使用する為のGem
