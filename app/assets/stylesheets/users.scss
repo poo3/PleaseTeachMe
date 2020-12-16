@@ -19,7 +19,7 @@ h1{
 .form-box {
   width: 100%;
   @include box_sizing();
-  border: 2px solid #0cc4e8;
+  border: 2px solid #880016;
   border-radius: 20px;
   padding: 0 6px;
   height: auto !important;
@@ -32,7 +32,7 @@ h1{
   >form {
     > .btn-submit{
       width: 30%;
-      background-color: #0cc4e8;
+      background-color: #880016;
       color: white;
       text-align: center;
       display: block;
