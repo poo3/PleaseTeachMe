@@ -4,7 +4,7 @@
 
 <h3>お問い合わせ内容の確認</h3>
 
-<p>content: <%= @contact.content %></p>
+<p>content: <%= safe_join(@contact.content.split("\n"),tag(:br)) %></p>
 
 <p>以下のメールアドレスに返信してください</p>
 <%= @contact.email%>
