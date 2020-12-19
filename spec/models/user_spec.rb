@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before do
-    @user = User.new(name:"Example User",email:"user@example.com",
-                  password: "foobarpoo3",password_confirmation: "foobarpoo3")
+    @user = FactoryBot.create(:user)
   end
 
   it "is valid" do
