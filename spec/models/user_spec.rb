@@ -85,4 +85,11 @@ RSpec.describe User, type: :model do
     @user.valid?
     expect(@user).to_not be_valid
   end
+
+  #ユーザが削除された時に質問も削除される
+  it "associcated quesitons be destoryed when it is desoryed" do
+    @user.save
+    @user.questions.create!(content: "testcontents!!")
+    expect{ @user.destroy }.to change{ Question.count}.by(-1)
+  end
 end
