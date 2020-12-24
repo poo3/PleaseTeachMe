@@ -1,3 +1,12 @@
 <% provide(:title, "ユーザプロフィール")%>
 <%= @user.email %>
 <%= @user.name %>
+
+<div class="quesitons-container">
+  <% if @user.questions.any? %>
+    <h3>questions (<%= @user.questions.count %>)</h3>
+    <ol class="questions">
+      <%= render @questions %>
+    </ol>
+  <% end %>
+</div>
