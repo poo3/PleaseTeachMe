@@ -2,6 +2,10 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
+
+# ランダムでユーザ名を生成する為のGem
+gem 'faker', '2.1.2'
+
 # .env環境変数を使うためのgem
 gem 'dotenv-rails'
 
