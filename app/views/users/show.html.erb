@@ -1,6 +1,10 @@
 <% provide(:title, "ユーザプロフィール")%>
-<%= @user.email %>
-<%= @user.name %>
+<div class="user-controller">
+  <p class="user-name"><%= @user.name %>さんPleaseTeachMeへようこそ</p>
+  <div class="user-controller-menu">
+    ユーザが行えるメニューが表示されます
+  </div>
+</div>
 
 <div class="quesitons-container">
   <% if @user.questions.any? %>
