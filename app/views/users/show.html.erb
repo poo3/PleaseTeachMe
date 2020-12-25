@@ -6,11 +6,11 @@
   </div>
 </div>
 
-<div class="quesitons-container">
+<div class="questions-wrapper">
   <% if @user.questions.any? %>
-    <h3>questions (<%= @user.questions.count %>)</h3>
-    <ol class="questions">
+    <h3 class="questions-count"><%= @user.questions.count %>個の質問をしています</h3>
+    <div class="questions-container">
       <%= render @questions %>
-    </ol>
+    </div>
   <% end %>
 </div>
