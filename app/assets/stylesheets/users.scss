@@ -23,11 +23,15 @@
 
 .questions-wrapper{
   width: 100%;
+  > .pagination {
+    text-align: center;
+    margin-top: 2vh;
+  }
   > .questions-count {
     text-align: center;
   }
   > .questions-container {
-    margin-top: 5vh;
+    margin-top: 1vh;
     width: 100%;
     display: flex;
     justify-content: center;

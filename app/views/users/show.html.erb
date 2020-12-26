@@ -9,8 +9,10 @@
 <div class="questions-wrapper">
   <% if @user.questions.any? %>
     <h3 class="questions-count"><%= @user.questions.count %>個の質問をしています</h3>
+    <%= will_paginate @questions,:previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
     <div class="questions-container">
       <%= render @questions %>
     </div>
+    <%= will_paginate @questions,:previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
   <% end %>
 </div>

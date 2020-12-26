@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @questions = @user.questions
+    @questions = @user.questions.paginate(page:params[:page], per_page:9)
   end
 
   def create
