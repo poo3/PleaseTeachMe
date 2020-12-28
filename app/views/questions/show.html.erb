@@ -3,6 +3,8 @@
 <div class="question-show-wrapper">
   <div class="question-show-container">
     <h3>投稿内容</h3>
-    <%= @question.content%>
+    <div class="question-confirmation-box">
+      <%= safe_join(@question.content.split("\n"),tag(:br)) %>
+    </div>
   </div>
 </div>
