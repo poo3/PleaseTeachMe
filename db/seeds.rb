@@ -29,5 +29,8 @@ end
 users = User.order(:created_at).take(6)
 50.times do
   content = Faker::Lorem.sentence(word_count: 5)
-  users.each { |user| user.questions.create!(content: content) }
+  users.each { |user| user.questions.create!(
+    content: content,
+    title: 'テスト投稿された質問') 
+  }
 end

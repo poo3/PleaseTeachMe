@@ -5,6 +5,8 @@
     <%= form_with(model: @question, local: true) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
+      <%= f.text_area :title, placeholder: "タイトルを入力", class: 'form-box' %>
+
       <%= f.text_area :content, placeholder: "質問内容を入力", class: 'form-box' %>
 
       <%= f.submit "投稿", class: "btn btn-submit" %>

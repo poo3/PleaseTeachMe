@@ -21,6 +21,16 @@ RSpec.describe Question, type: :model do
     expect(@question).to_not be_valid
   end
 
+  it "is invalid without title" do
+    @question.title = '   '
+    expect(@question).to_not be_valid
+  end
+
+  it "doesn't have content length 30 or less" do
+    @question.title = 'a'*31
+    expect(@question).to_not be_valid
+  end
+
   it "doesn't have content length 500 or less" do
     @question.content = 'a'*501
     expect(@question).to_not be_valid
