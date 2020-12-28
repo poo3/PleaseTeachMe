@@ -1,6 +1,10 @@
 class QuestionsController < ApplicationController
   before_action :logged_in_user, only: [:create,:destroy]
 
+  def new
+    @question = Question.new
+  end
+
   def create
     @question = correct_user.questions.build(question_params)
     if @question.save
