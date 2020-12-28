@@ -63,7 +63,6 @@ RSpec.describe "UsersEdits", type: :system do
     end
     scenario "セッションが切れている状態で編集ページアクセス" do
       visit edit_user_path(@test_user)
-      expect(page).to have_content 'ログインしてください'
       expect(page).to have_content 'Log in'
     end
   end
