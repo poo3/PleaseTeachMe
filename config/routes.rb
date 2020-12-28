@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   resources :users
 
   resources :contact
-  resources :questions, only: [:new,:create, :destroy]
+  resources :questions, only: [:show,:new,:create, :destroy]
 end
