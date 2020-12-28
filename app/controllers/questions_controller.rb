@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.build(question_params)
     if @question.save
       flash[:success] = "Question created!"
-      redirect_to root_url
+      redirect_to user_path(current_user)
     else
       render 'users/show'
     end
