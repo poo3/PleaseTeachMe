@@ -1,7 +1,13 @@
-<%= form_with(model: @question, local: true) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <div class="field">
-    <%= f.text_area :content, placeholder: "質問内容を入力", class: 'form-box' %>
+<h1 class="question-head">質問投稿</h1>
+
+<div class="question-form-wrapper">
+  <div class="question-form-container">
+    <%= form_with(model: @question, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.text_area :content, placeholder: "質問内容を入力", class: 'form-box' %>
+
+      <%= f.submit "投稿", class: "btn btn-submit" %>
+    <% end %>
   </div>
-  <%= f.submit "Post", class: "btn btn-submit" %>
-<% end %>
+</div>
