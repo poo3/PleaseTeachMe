@@ -8,5 +8,6 @@
     <div class="question-confirmation-box">
       <%= safe_join(@question.content.split("\n"),tag(:br)) %>
     </div>
+    <%= link_to '質問を削除',@question ,method: :delete,data: {confirm: "本当に削除しますか？"}%>
   </div>
 </div>
