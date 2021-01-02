@@ -15,7 +15,7 @@ class QuestionsController < ApplicationController
       flash[:success] = "Question created!"
       redirect_to user_path(current_user)
     else
-      render 'users/show'
+      render 'questions/new'
     end
   end
 
