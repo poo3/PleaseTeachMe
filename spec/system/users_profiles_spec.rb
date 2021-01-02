@@ -6,7 +6,7 @@ RSpec.describe "UsersProfiles", type: :system do
     @user = FactoryBot.create(:user)
     50.times do
       content = Faker::Lorem.sentence(word_count: 5)
-      @user.questions.create!(content: content)
+      @user.questions.create!(title: "TestTitle",content: content)
     end
   end
 

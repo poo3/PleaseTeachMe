@@ -89,7 +89,7 @@ RSpec.describe User, type: :model do
   #ユーザが削除された時に質問も削除される
   it "associcated quesitons be destoryed when it is desoryed" do
     @user.save
-    @user.questions.create!(content: "testcontents!!")
+    @user.questions.create!(title: "TestTitle",content: "testcontents!!")
     expect{ @user.destroy }.to change{ Question.count}.by(-1)
   end
 end
