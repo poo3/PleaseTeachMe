@@ -1,0 +1,13 @@
+<h1 class="question-show">質問内容確認</h1>
+
+<div class="question-show-wrapper">
+  <div class="question-show-container">
+    <h3>
+      <%= @question.title %>
+    </h3>
+    <div class="question-confirmation-box">
+      <%= safe_join(@question.content.split("\n"),tag(:br)) %>
+    </div>
+    <%= link_to '質問を削除',@question ,method: :delete,data: {confirm: "本当に削除しますか？"},class: "delete-question-link"%>
+  </div>
+</div>

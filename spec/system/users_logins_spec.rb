@@ -13,8 +13,6 @@ RSpec.describe "UsersLogins", type: :system do
         #ログイン後エラーメッセージが表示されているか確認する
         expect(page).to have_content 'Log in'
         expect(page).to have_selector 'div.alert-danger'
-        visit root_path
-        expect(page).to_not have_selector 'div.alert'
       end
     end
 

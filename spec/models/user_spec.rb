@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before do
-    @user = User.new(name:"Example User",email:"user@example.com",
-                  password: "foobarpoo3",password_confirmation: "foobarpoo3")
+    @user = FactoryBot.create(:user)
   end
 
   it "is valid" do
@@ -85,5 +84,12 @@ RSpec.describe User, type: :model do
     @user.password = @user.password_confirmation = "a"*7
     @user.valid?
     expect(@user).to_not be_valid
+  end
+
+  #ユーザが削除された時に質問も削除される
+  it "associcated quesitons be destoryed when it is desoryed" do
+    @user.save
+    @user.questions.create!(title: "TestTitle",content: "testcontents!!")
+    expect{ @user.destroy }.to change{ Question.count}.by(-1)
   end
 end

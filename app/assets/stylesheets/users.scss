@@ -9,6 +9,55 @@
   box-sizing:         border-box;
 }
 
+// ユーザ詳細画面
+
+.main-container {
+  width: 100%;
+}
+
+.user-controller {
+  text-align: center;
+  width: 100%;
+  margin: 5vh 0;
+}
+
+.questions-wrapper{
+  width: 100%;
+  > .pagination {
+    text-align: center;
+    margin-top: 2vh;
+  }
+  > .questions-count {
+    text-align: center;
+  }
+  > .questions-container {
+    margin-top: 1vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    > .question-box {
+      position: relative;
+      border: 1px solid #880016;
+      border-radius: 5px;
+      margin: 1vh;
+      height: 30vh;
+      width: 30%;
+      text-align: center;
+      > .question-title {
+        display: block;
+        width: 100%;
+        margin-top: 1vh;
+      }
+      > .question-timestamp {
+        position: absolute;
+        bottom: 5px;
+        text-align: right;
+      }
+    }
+  }
+}
+
 /* forms */
 
 h1{

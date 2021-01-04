@@ -1,0 +1,45 @@
+// Place all the styles related to the Questions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+// 質問投稿
+.question-head {
+  color:#880016;
+}
+
+.question-form-container{
+  width: 50%;
+  margin: 0 auto;
+  >form {
+    > .btn-submit{
+      width: 30%;
+      background-color: #880016;
+      color: white;
+      text-align: center;
+      display: block;
+      margin: 60px auto 100px auto;
+    }
+  }
+}
+
+// 質問詳細画面
+
+.question-show {
+  color: #880016;
+}
+
+.question-show-wrapper{
+
+  > .question-show-container {
+    > h3 {
+      text-align: center;
+    }
+    > .question-confirmation-box {
+      width: 50%;
+      margin: 3vh auto;
+      text-align: center;
+      border: #880016 solid 1px;
+      border-radius: 10px;
+    }
+  }
+}
