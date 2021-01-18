@@ -179,3 +179,22 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
 .alert-danger {
   color: red;
 }
+
+// フォームデザイン
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+.form-box {
+  width: 100%;
+  @include box_sizing();
+  border: 2px solid #880016;
+  border-radius: 20px;
+  padding: 0 6px;
+  height: auto !important;
+  margin-bottom: 40px;
+  outline: none;
+}
