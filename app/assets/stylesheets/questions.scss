@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+
 // 質問投稿
 .question-head {
   color:#880016;
@@ -40,6 +41,16 @@
       text-align: center;
       border: #880016 solid 1px;
       border-radius: 10px;
+    }
+    > .delete-question-link {
+      border-radius: 10px;
+      text-decoration: none;
+      width: 30%;
+      background-color: #880016;
+      color: white;
+      text-align: center;
+      display: block;
+      margin: 60px auto 100px auto;
     }
   }
 }
