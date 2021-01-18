@@ -13,18 +13,6 @@ RSpec.describe "QuestionsDeletes", type: :system do
     click_button 'ログイン'
   end
 
-  scenario "ユーザ一覧画面から質問を削除する" do
-    visit user_path(@test_user)
-    expect(page).to have_content @test_user.name
-    expect(@test_user.questions.count).to eq 10
-    # 質問削除ボタンをクリック
-    page.accept_confirm do
-      first(".delete-question-link").click
-    end
-    # 質問の数が変わっているか確認する
-    expect(page).to have_content "9"
-  end
-
   scenario "質問詳細画面から質問を削除する" do
     visit user_path(@test_user)
     expect(page).to have_content @test_user.name
