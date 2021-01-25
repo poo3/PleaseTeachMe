@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
 
+# 日本語対応
+gem 'rails-i18n'
+
 # ページネーションgem
 gem 'will_paginate', '3.1.8'
 
