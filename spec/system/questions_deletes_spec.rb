@@ -7,10 +7,7 @@ RSpec.describe "QuestionsDeletes", type: :system do
     #質問を複数個作成する
     @test_questions = FactoryBot.create_list(:question,10,user: @test_user)
     #テストユーザでログインする
-    visit login_path
-    fill_in 'session_email', with: @test_user.email
-    fill_in 'session_password', with: @test_user.password
-    click_button 'ログイン'
+    sign_in_as @test_user
   end
 
   scenario "質問詳細画面から質問を削除する" do

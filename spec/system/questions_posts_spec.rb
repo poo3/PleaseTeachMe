@@ -9,10 +9,6 @@ RSpec.describe "QuestionsPosts", type: :system do
     # 質問の個数を記録する変数
     @count_question = Question.count
     #テストユーザでログインする
-    # visit login_path
-    # fill_in 'session_email', with: @test_user.email
-    # fill_in 'session_password', with: @test_user.password
-    # click_button 'ログイン'
     sign_in_as @test_user
   end
 

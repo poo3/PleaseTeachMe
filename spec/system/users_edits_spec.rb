@@ -7,10 +7,7 @@ RSpec.describe "UsersEdits", type: :system do
       #ユーザを作成する
       @test_user = FactoryBot.create(:user)
       #テストユーザでログインする
-      visit login_path
-      fill_in 'session_email', with: @test_user.email
-      fill_in 'session_password', with: @test_user.password
-      click_button 'ログイン'
+      sign_in_as @test_user
     end
   
     scenario "名前がない状態で編集登録する" do
