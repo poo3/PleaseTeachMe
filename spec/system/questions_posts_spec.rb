@@ -19,25 +19,21 @@ RSpec.describe "QuestionsPosts", type: :system do
     click_link '質問を投稿'
     # 質問投稿画面
     expect(page).to have_content '質問投稿'
-    # fill_in 'question_title', with: @test_question.title
-    # fill_in 'question_content', with: @test_question.content
-    # click_button '投稿'
     post_question(@test_question)
     expect(page).to have_content @test_user.name
     expect(Question.count).to eq @count_question+1
     expect(page).to have_content @test_question.title
   end
   
-  scenario "titleが入力されていない状態で質問を投稿する" do
+  scenario "titleの文字制限を超えた状態で質問を投稿する" do
+    @test_question.title = 'a'*100
     # ユーザ詳細画面
     visit user_path(@test_user)
     expect(page).to have_selector 'div.questions-wrapper'
     click_link '質問を投稿'
     # 質問投稿画面
     expect(page).to have_content '質問投稿'
-    fill_in 'question_title', with: 'a'*100
-    fill_in 'question_content', with: @test_question.content
-    click_button '投稿'
+    post_question(@test_question)
     expect(page).to have_content '質問投稿'
   end
 
