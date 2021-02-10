@@ -38,6 +38,8 @@ RSpec.configure do |config|
 
   # login用helper
   config.include LoginSupport
+  # 質問投稿helper
+  config.include PostQuestionsSupport
   #クッキーをテストの最中に見ることができる
   config.include ShowMeTheCookies, :type => :system
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

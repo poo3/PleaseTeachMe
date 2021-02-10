@@ -19,9 +19,10 @@ RSpec.describe "QuestionsPosts", type: :system do
     click_link '質問を投稿'
     # 質問投稿画面
     expect(page).to have_content '質問投稿'
-    fill_in 'question_title', with: @test_question.title
-    fill_in 'question_content', with: @test_question.content
-    click_button '投稿'
+    # fill_in 'question_title', with: @test_question.title
+    # fill_in 'question_content', with: @test_question.content
+    # click_button '投稿'
+    post_question(@test_question)
     expect(page).to have_content @test_user.name
     expect(Question.count).to eq @count_question+1
     expect(page).to have_content @test_question.title
