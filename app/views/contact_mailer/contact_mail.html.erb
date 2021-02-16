@@ -3,8 +3,8 @@
 <h3>お名前: <%= @contact.name %></h3>
 
 <h3>お問い合わせ内容の確認</h3>
-
-<p>content: <%= safe_join(@contact.content.split("\n"),tag(:br)) %></p>
-
+-----------------------------
+<p><%= safe_join(@contact.content.split("\n"),tag(:br)) %></p>
+-----------------------------
 <p>以下のメールアドレスに返信してください</p>
 <%= @contact.email%>
