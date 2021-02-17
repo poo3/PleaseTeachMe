@@ -1,7 +1,5 @@
 document.addEventListener("turbolinks:load", function() {
   var user_nav = document.getElementById('user-nav');
-  const button = document.getElementById("user-nav-button");
-  const body = document.body;
   document.getElementById('user-nav').style.display = 'none'
   // ボタンをクリックしたらナビゲーションの表示の切り替え
   
