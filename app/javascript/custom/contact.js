@@ -22,5 +22,10 @@ document.addEventListener("turbolinks:load", function(){
     var currentTextNum = textarea.value.length;
     //  (maxTextNum - currentTextNum) で残り文字数を求めている
     textMessage.innerHTML = '<p>あと「' + (maxTextNum - currentTextNum) + '」文字入力できます。</p>';
+    if( (maxTextNum - currentTextNum) === 0){
+      textMessage.style.color = 'red'
+    } else {
+      textMessage.style.color = 'black'
+    }
   });
 });
