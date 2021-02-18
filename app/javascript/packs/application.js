@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 
 require("custom/home")
+require("custom/contact")
 
 import '@fortawesome/fontawesome-free/js/all';
 
