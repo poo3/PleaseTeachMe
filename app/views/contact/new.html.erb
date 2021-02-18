@@ -3,14 +3,14 @@
 
 <div class="user-form-wrapper contact-form-wrapper">
   <div class="user-form-container contact-form-container">
-    <%= form_with(url: contact_index_path,model: @contact, local: true) do |f| %>
+    <%= form_with(url: contact_index_path,model: @contact, local: true,id: "contact-form") do |f| %>
       <%= render 'shared/error_messages', object: f.object%>
 
       <%= f.text_field :name, class: "form-box", placeholder: "お名前ご記入ください"%>
 
       <%= f.email_field :email, class: "form-box", placeholder: "メールアドレスご記入ください"%>
 
-      <%= f.text_area :content, class: "form-box", placeholder: "お問い合わせ内容ご記入ください",rows: "20" %>
+      <%= f.text_area :content, class: "form-box", placeholder: "お問い合わせ内容ご記入ください",rows: "20",maxlength: 500 %>
       
       <%= f.submit "送信", class: "btn btn-submit"%>
     <% end %>
