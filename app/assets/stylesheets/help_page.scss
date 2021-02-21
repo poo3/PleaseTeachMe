@@ -1,0 +1,51 @@
+// ヘルプページのアコーディオン
+
+.qanda-content {
+  margin-bottom: 1rem;
+  > details {
+    // border: solid black;
+    margin: 0 auto; 
+    width: 60%;
+    > summary {
+      padding: 0.5rem ;
+      border: 1px solid black;
+      margin-bottom: 0.1rem;
+      > span {
+        color: red;
+        margin-right: 0.5rem;
+      }
+    }
+    > p {
+      padding: 0.5rem ;
+      > span {
+        margin-right: 0.5rem;
+        color: blue;
+      }
+      /* オープン時にアニメーションを設定 */
+      animation: fadeIn 0.5s ease;
+      @keyframes fadeIn {
+        0% {
+          opacity: 0; /* 透明 */
+          transform: translateY(-10px); /* 上から表示 */
+        }
+        100% {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      border: 1px solid black;
+    }
+  }
+}
+
+// アコーディオンの矢印消す
+/* Chrome、Safari以外 */
+summary {
+  display: block;
+}
+
+/* Chrome、Safari */
+summary::-webkit-details-marker {
+  display: none;
+}
+
