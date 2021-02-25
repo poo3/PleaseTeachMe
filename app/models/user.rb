@@ -9,6 +9,7 @@ class User < ApplicationRecord
               uniqueness: true
   has_secure_password
   validates :password,presence: true,length:{minimum: 8},allow_nil: true
+  validates :user_type,presence: true
 
   class << self
     # 渡された文字列のハッシュ値を返す
