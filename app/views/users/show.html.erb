@@ -1,19 +1,34 @@
 <% provide(:title, "ユーザプロフィール")%>
-<div class="user-controller">
-  <p class="user-name"><%= @user.name %>さんPleaseTeachMeへようこそ</p>
-  <div class="user-controller-menu">
-    ユーザが行えるメニューが表示されます
-    <%= link_to '質問を投稿', new_question_path %>
-  </div>
+
+<div>
+  <p>現在<%= @user.user_type%>のアカウントでログインしています</p>
 </div>
 
-<div class="questions-wrapper">
-  <% if @user.questions.any? %>
-    <h3 class="questions-count"><%= @user.questions.count %>個の質問をしています</h3>
-    <%= will_paginate @questions,:previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
-    <div class="questions-container">
-      <%= render @questions %>
+
+<% if @user.user_type == 'student'%>
+  <div class="user-controller">
+    <p class="user-name"><%= @user.name %>さんPleaseTeachMeへようこそ</p>
+    <div class="user-controller-menu">
+      ユーザが行えるメニューが表示されます
+      <%= link_to '質問を投稿', new_question_path %>
     </div>
-    <%= will_paginate @questions,:previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
-  <% end %>
-</div>
+  </div>
+
+  <div class="questions-wrapper">
+    <% if @user.questions.any? %>
+      <h3 class="questions-count"><%= @user.questions.count %>個の質問をしています</h3>
+      <%= will_paginate @questions,:previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
+      <div class="questions-container">
+        <%= render @questions %>
+      </div>
+      <%= will_paginate @questions,:previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
+    <% end %>
+  </div>
+
+<% end %>
+
+<% if @user.user_type == 'teacher'%>
+  <div>
+    <p>先生なう</p>
+  </div>
+<% end %>
