@@ -1,4 +1,28 @@
 <% provide(:title, "ユーザ編集")%>
 <h1>Edit User</h1>
 
-<%= render 'form'%>
+
+<% if @user.user_type == 'student'%>
+  <h2 class="user-type">生徒ユーザ</h2>
+<% else %>
+  <h2 class="user-type">教師ユーザ</h2>
+<% end %>
+
+
+<div class="user-form-wrapper">
+  <div class="user-form-container">
+    <%= form_with(model: @user, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object%>
+
+      <%= f.text_field :name, class: 'form-box', placeholder: "名前を入力してください"%>
+
+      <%= f.email_field :email, class: "form-box", placeholder: "メールアドレス"%>
+
+      <%= f.password_field :password, class: "form-box", placeholder: "変更したいパスワード(半角英数字パスワード8文字以上)"%>
+
+      <%= f.password_field :password_confirmation, class: "form-box", placeholder: "パスワード再入力"%>
+      
+      <%= f.submit params[:id] == nil ? "新規登録" : "編集完了", class: "btn btn-submit"%>
+    <% end %>
+  </div>
+</div>

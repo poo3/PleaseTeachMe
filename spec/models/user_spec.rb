@@ -10,6 +10,12 @@ RSpec.describe User, type: :model do
     expect(@user).to be_valid
   end
 
+  it "is invalid without user_type" do
+    @user.user_type = '  '
+    @user.valid?
+    expect(@user).to_not be_valid
+  end
+
   it "is invalid without name" do
     @user.name = '  '
     @user.valid?
