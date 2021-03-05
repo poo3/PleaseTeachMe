@@ -21,6 +21,7 @@ RSpec.describe "UsersSignupTests", type: :system do
       visit new_user_path
       fill_in 'user_name', with: 'poo3'
       fill_in 'user_email', with: 'example@example.com'
+      select '先生', from: 'user_user_type'
       fill_in 'user_password', with: 'test1234test1234'
       fill_in 'user_password_confirmation', with: 'test1234test1234'
       click_button '新規登録'
