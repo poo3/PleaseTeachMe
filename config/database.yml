@@ -8,32 +8,33 @@
 #   adapter: sqlite3
 #   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 #   timeout: 5000
-  
+
 default: &default
   adapter: mysql2
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV['DB_USERNAME']%>
-  password: <%= ENV['DB_PASSWORD']%>
+  username: <%= ENV.fetch("MYSQL_USERNAME", "root") %>
+  password: <%= ENV.fetch("MYSQL_PASSWORD", "password") %>
   socket: /tmp/mysql.sock
+  host: <%= ENV.fetch("MYSQL_HOST", "db") %>
   # エラー解決の為追加
   encoding: utf8mb4
   charset: utf8mb4
   collation: utf8mb4_unicode_ci
 
-
-
 development:
   <<: *default
-  database: please_teach_me_development
+  database: myapp_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: please_teach_me_test
+  database: myapp_test
 
 production:
   # For details on connection pooling, see Rails configuration guide
   # https://railsguides.jp/configuring.html#データベース接続をプールする
-  url: <%= ENV['DATABASE_URL'] %>  
+  database: myapp_production
+  username: myapp
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
