@@ -36,7 +36,8 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+# cricleciテスト結果用
+gem 'rspec_junit_formatter'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -65,7 +66,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  gem 'webdrivers',require: !ENV['SELENIUM_DRIVER_URL']
   #テストの最中のクッキーの値などを確認することができる
   gem 'show_me_the_cookies'
 

@@ -1,5 +1,5 @@
 FROM ruby:2.6.6
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client yarn chromium-driver 
+RUN apt-get update -qq && apt-get install -y nodejs yarn chromium-driver
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile

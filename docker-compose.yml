@@ -3,6 +3,7 @@ services:
   db:
     image: mysql:8.0
     environment:
+      MYSQL_DATABASE: myapp
       MYSQL_ROOT_PASSWORD: password
     ports:
       - "3306:3306"
@@ -21,10 +22,14 @@ services:
       - chrome
     stdin_open: true
     tty: true
+    environment: #以下追記
+      - "SELENIUM_DRIVER_URL=http://chrome:4444/wd/hub/usr/bin"
   chrome:
     image: selenium/standalone-chrome:3.141.59-dubnium
     ports:
       - 4444:4444
+    volumes:
+      - /dev/shm:/dev/shm
 volumes:
   mysql-data:
     driver: local

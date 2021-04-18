@@ -1,5 +1,6 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'capybara/rspec'
 ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path('../config/environment', __dir__)
@@ -66,4 +67,28 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Setup to run system spec
+  # 
+  
+  # 省略
+  # Setup to run system spec
+  config.before(:each, type: :system) do
+    driven_by :selenium_chrome
+  end
+
+  config.before(:each, type: :system, js: true) do
+    driven_by :selenium_chrome
+  end
+
+  # config.before(:each, type: :system) do
+  #   driven_by :rack_test
+  # end
+
+  # config.before(:each, type: :system, js: true) do
+  #   driven_by :remote_chrome
+  #   Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+  #   Capybara.server_port = 3000
+  #   Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
+  # end
 end
