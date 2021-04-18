@@ -1,5 +1,9 @@
 FROM ruby:2.6.6
-RUN apt-get update -qq && apt-get install -y nodejs yarn chromium-driver
+RUN apt-get update -qq && apt-get install -y nodejs chromium-driver
+# 公式のインストール方法を参考に安定版で最新のyarnをインストールする
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && apt-get install yarn
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
