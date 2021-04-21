@@ -1,67 +1,68 @@
 <template>
   <header>
-    <h1>Header</h1>
-    <div class="header-wrapper">
-      <div class="app-logo-container">
-        <!-- <%= link_to embedded_svg("PLEASE TEACH ME LOGO.svg", class:
-        "application-logo",alt: "PleaseTeachMe logo", width:"200px"), root_path
-        %> -->
-        <router-link
-          class="application-logo"
-          src="@/assets/images/PLEASE TEACH ME LOGO.svg"
-        ></router-link>
+    <nav>
+      <div class="nav-application-logo">
+        <router-link to="/">
+          <img src="~please_teach_me.png" alt="please_teach_me_logo_img" />
+        </router-link>
       </div>
-      <nav>
-        <div class="nav-container">
-          <div class="static-pages-nav">
-            <ul class="nav">
-              <li>
-                <router-link></router-link>
-                <!-- <%= link_to 'ヘルプ',
-                static_pages_help_path %> -->
-              </li>
-              <li>
-                <router-link></router-link>
-                <!-- <%= link_to 'お問合せ',
-                new_contact_path %> -->
-              </li>
-            </ul>
-          </div>
-          <div class="user-nav-wrapper">
-            <button id="user-nav-button" type="button">
-              <div>
-                <%= image_tag("user-menu-logo",class: "user-menu-logo")%>
-              </div>
-            </button>
-            <div class="user-nav" id="user-nav">
-              <ul>
-                <!-- <%if logged_in? %> -->
-                <li v-if="logged_in">
-                  <!-- <%= link_to "ログアウト" , logout_path, method: :delete %> -->
-                </li>
-                <li v-if="logged_in">
-                  <!-- <%= link_to "マイページ" , user_path(current_user) %> -->
-                </li>
-                <li v-if="logged_in">
-                  <!-- <%= link_to "登録内容編集", edit_user_path(current_user) %> -->
-                </li>
-                <% else %>
-                <li v-if="logged_in">
-                  <!-- <%= link_to '登録する', new_user_path , class: "signup-btn"%> -->
-                </li>
-                <li v-if="logged_in">
-                  <!-- <%= link_to "ログイン", login_path %> -->
-                </li>
-                <!-- <% end %> -->
-              </ul>
-            </div>
-          </div>
+      <div class="nav-menu-wrapper">
+        <div class="nav-menu">
+          <router-link to="help">ヘルプ</router-link>
         </div>
-      </nav>
-    </div>
+        <div class="nav-menu">
+          <router-link to="contact">お問い合わせ</router-link>
+        </div>
+      </div>
+      <div class="nav-usermenu">
+        <img src="~user-menu-logo.png" alt="user-menu-logo-img" />
+      </div>
+    </nav>
   </header>
 </template>
 
 <script>
+import "please_teach_me.png";
+import "user-menu-logo.png";
+import "PleaseTeachMe-background-home.png";
 export default {};
 </script>
+
+<style lang="scss" scoped>
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url("~PleaseTeachMe-background-home.png");
+  background-repeat: no-repeat;
+  > .nav-application-logo {
+    margin-left: 5rem;
+  }
+  > .nav-menu-wrapper {
+    display: flex;
+    margin-right: 40rem;
+    > .nav-menu {
+      margin: 0 5rem;
+      > a {
+        text-decoration: none;
+        color: whitesmoke;
+        font-weight: bold;
+        font-size: 1.3rem;
+      }
+      > a:hover {
+        color: black;
+      }
+    }
+  }
+  > .nav-usermenu {
+    margin-right: 5rem;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 4rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+  }
+}
+</style>
