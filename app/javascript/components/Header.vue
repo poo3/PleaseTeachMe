@@ -15,7 +15,11 @@
         </div>
       </div>
       <div class="nav-usermenu">
-        <img src="~user-menu-logo.png" alt="user-menu-logo-img" />
+        <img
+          src="~user-menu-logo.png"
+          alt="user-menu-logo-img"
+          class="nav-usermenu"
+        />
         <div class="usermenu-wrapper" v-show="usermenuActivated">
           <ul>
             <router-link to="help" tag="li">ログイン</router-link>

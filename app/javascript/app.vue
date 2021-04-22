@@ -23,12 +23,12 @@ export default {
     // usermenuToggle
     usermenuClose(element) {
       if (element.target.className !== "nav-usermenu") {
-        //ここに外側をクリックしたときの処理
+        //ここにusermenu以外をクリックしたときの処理
         if (this.$refs.header.usermenuActivated) {
           this.$refs.header.usermenuToggle();
-        } else {
-          this.$refs.header.usermenuToggle();
         }
+      } else {
+        this.$refs.header.usermenuToggle();
       }
     },
   },
