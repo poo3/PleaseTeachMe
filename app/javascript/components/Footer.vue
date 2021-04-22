@@ -9,6 +9,12 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+}
 .copy-right {
   text-align: center;
   color: black;
