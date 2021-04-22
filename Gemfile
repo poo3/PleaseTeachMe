@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
 
+# railsのサーバーとWebpackerのサーバー同時立ち上げ用
+gem 'foreman'
+
 # 日本語対応
 gem 'rails-i18n'
 

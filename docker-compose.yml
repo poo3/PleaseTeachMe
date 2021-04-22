@@ -12,11 +12,12 @@ services:
       - mysql-data:/var/lib/mysql
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bundle exec foreman start -f Procfile.dev
     volumes:
       - .:/myapp
     ports:
       - "3000:3000"
+      - "8000:8000"
     depends_on:
       - db
       - chrome

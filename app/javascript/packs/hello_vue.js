@@ -29,11 +29,13 @@
 //
 import Vue from "vue/dist/vue.esm";
 import router from "./router";
+import App from "../app";
 
 document.addEventListener("DOMContentLoaded", () => {
   const app = new Vue({
     el: "#app",
     router,
+    render: (h) => h(App),
   });
 });
 
@@ -71,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //
 // Then uncomment the code block below:
 //
-// import TurbolinksAdapter from 'vue-turbolinks'
+import TurbolinksAdapter from "vue-turbolinks";
 // import Vue from 'vue/dist/vue.esm'
 // import App from '../app.vue'
 //
