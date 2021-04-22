@@ -14,7 +14,7 @@
           <router-link to="contact">お問い合わせ</router-link>
         </div>
       </div>
-      <div class="nav-usermenu" @click="usermenuToggle()">
+      <div class="nav-usermenu">
         <img src="~user-menu-logo.png" alt="user-menu-logo-img" />
         <div class="usermenu-wrapper" v-show="usermenuActivated">
           <ul>

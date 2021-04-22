@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Header></Header>
+  <div @click="usermenuClose">
+    <Header ref="header"></Header>
     <router-view></router-view>
     <Footer></Footer>
   </div>
@@ -18,6 +18,20 @@ export default {
   components: {
     Header,
     Footer,
+  },
+  methods: {
+    usermenuClose(element) {
+      console.log(element);
+      if (element.target.className !== "nav-usermenu") {
+        //ここに外側をクリックしたときの処理
+        if (this.$refs.header.usermenuActivated) {
+          console.log("usermenuToggle");
+          this.$refs.header.usermenuToggle();
+        } else {
+          this.$refs.header.usermenuToggle();
+        }
+      }
+    },
   },
 };
 </script>
