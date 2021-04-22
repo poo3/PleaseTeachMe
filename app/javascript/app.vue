@@ -20,12 +20,11 @@ export default {
     Footer,
   },
   methods: {
+    // usermenuToggle
     usermenuClose(element) {
-      console.log(element);
       if (element.target.className !== "nav-usermenu") {
         //ここに外側をクリックしたときの処理
         if (this.$refs.header.usermenuActivated) {
-          console.log("usermenuToggle");
           this.$refs.header.usermenuToggle();
         } else {
           this.$refs.header.usermenuToggle();
