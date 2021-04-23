@@ -15,7 +15,17 @@
         </div>
       </div>
       <div class="nav-usermenu">
-        <img src="~user-menu-logo.png" alt="user-menu-logo-img" />
+        <img
+          src="~user-menu-logo.png"
+          alt="user-menu-logo-img"
+          class="nav-usermenu"
+        />
+        <div class="usermenu-wrapper" v-show="usermenuActivated">
+          <ul>
+            <router-link to="help" tag="li">ログイン</router-link>
+            <router-link to="contact" tag="li">新規登録</router-link>
+          </ul>
+        </div>
       </div>
     </nav>
   </header>
@@ -25,7 +35,20 @@
 import "please_teach_me.png";
 import "user-menu-logo.png";
 import "PleaseTeachMe-background-home.png";
-export default {};
+export default {
+  data() {
+    return { usermenuActivated: false };
+  },
+  created: {},
+  computed: {},
+  methods: {
+    usermenuToggle() {
+      const usermenuElement = document.querySelector(".usermenu-wrapper");
+      usermenuElement.classList.toggle("usermenu--active");
+      this.usermenuActivated = !this.usermenuActivated;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -63,6 +86,28 @@ nav {
     width: 4rem;
     height: 3rem;
     border-radius: 1.5rem;
+    position: relative;
+    > .usermenu-wrapper {
+      padding: 1.5rem 0;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 400%;
+      border: 1px solid gray;
+      border-radius: 2rem;
+      background-color: whitesmoke;
+      > ul {
+        list-style: none;
+        width: 100%;
+        > li {
+          padding: 0.5rem 1rem;
+          width: 100%;
+        }
+        > li:hover {
+          background-color: rgba(0, 0, 0, 0.04);
+        }
+      }
+    }
   }
 }
 </style>
