@@ -6,9 +6,16 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def index
+    @user = User.find(params[:id]).select( :name,:user_type)
+    render json: @user
+  end
+
   def show
+    # @user = User.find(params[:id])
+    # @questions = @user.questions.paginate(page:params[:page], per_page:9)
     @user = User.find(params[:id])
-    @questions = @user.questions.paginate(page:params[:page], per_page:9)
+    render json: @user
   end
 
   def create
