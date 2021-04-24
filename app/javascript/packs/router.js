@@ -5,9 +5,9 @@ import Help from "../components/staticpages/Help";
 import Contact from "../components/staticpages/Contact";
 import Entrance from "../components/sessions/Entrance";
 import Register from "../components/sessions/Register";
-import StudentNew from "../components/student/StudentNew";
-import TeacherNew from "../components/teacher/TeacherNew";
-import StudentShow from "../components/student/StudentShow";
+import StudentsNew from "../components/students/StudentNew";
+import TeachersNew from "../components/teachers/TeacherNew";
+import StudentsShow from "../components/students/StudentShow";
 
 Vue.use(VueRouter);
 
@@ -19,8 +19,8 @@ const router = new VueRouter({
     { path: "/contact", component: Contact, name: "contact_path" },
     { path: "/entrance", component: Entrance, name: "entrance_path" },
     { path: "/register", component: Register, name: "register_path" },
-    { path: "/students/new", component: StudentNew, name: "student_new_path" },
-    { path: "/teachers/new", component: TeacherNew, name: "teacher_new_path" },
+    { path: "/students/new", component: StudentsNew, name: "student_new_path" },
+    { path: "/teachers/new", component: TeachersNew, name: "teacher_new_path" },
     {
       path: "/students/:id(\\d+)",
       component: StudentShow,
