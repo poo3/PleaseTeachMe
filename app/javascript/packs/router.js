@@ -5,9 +5,10 @@ import Help from "../components/staticpages/Help";
 import Contact from "../components/staticpages/Contact";
 import Entrance from "../components/sessions/Entrance";
 import Register from "../components/sessions/Register";
-import StudentsNew from "../components/students/StudentNew";
-import TeachersNew from "../components/teachers/TeacherNew";
-import StudentsShow from "../components/students/StudentShow";
+import StudentsNew from "../components/students/StudentsNew";
+import TeachersNew from "../components/teachers/TeachersNew";
+import StudentsShow from "../components/students/StudentsShow";
+import TeachersShow from "../components/teachers/TeachersShow";
 
 Vue.use(VueRouter);
 
@@ -19,12 +20,25 @@ const router = new VueRouter({
     { path: "/contact", component: Contact, name: "contact_path" },
     { path: "/entrance", component: Entrance, name: "entrance_path" },
     { path: "/register", component: Register, name: "register_path" },
-    { path: "/students/new", component: StudentsNew, name: "student_new_path" },
-    { path: "/teachers/new", component: TeachersNew, name: "teacher_new_path" },
+    {
+      path: "/students/new",
+      component: StudentsNew,
+      name: "students_new_path",
+    },
+    {
+      path: "/teachers/new",
+      component: TeachersNew,
+      name: "teachers_new_path",
+    },
     {
       path: "/students/:id(\\d+)",
-      component: StudentShow,
-      name: "student_user_show_path",
+      component: StudentsShow,
+      name: "students_user_show_path",
+    },
+    {
+      path: "/teachers/:id(\\d+)",
+      component: TeachersShow,
+      name: "teachers_user_show_path",
     },
   ],
 });
