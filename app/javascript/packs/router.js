@@ -7,6 +7,7 @@ import Entrance from "../components/sessions/Entrance";
 import Register from "../components/sessions/Register";
 import StudentNew from "../components/student/StudentNew";
 import TeacherNew from "../components/teacher/TeacherNew";
+import StudentShow from "../components/student/StudentShow";
 
 Vue.use(VueRouter);
 
@@ -20,6 +21,11 @@ const router = new VueRouter({
     { path: "/register", component: Register, name: "register_path" },
     { path: "/student/new", component: StudentNew, name: "student_new_path" },
     { path: "/teacher/new", component: TeacherNew, name: "teacher_new_path" },
+    {
+      path: "/students/:id(\\d+)",
+      component: StudentShow,
+      name: "student_user_show_path",
+    },
   ],
 });
 

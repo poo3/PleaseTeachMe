@@ -1,10 +1,18 @@
 <template>
   <div class="user-form-wrapper">
+    <div v-if="errors.length != 0">
+      <ul v-for="e in errors" :key="e">
+        <li>
+          <font color="red">{{ e }}</font>
+        </li>
+      </ul>
+    </div>
     <div class="form-group">
       <label for="userName">名前</label>
       <input
         type="text"
         name="userName"
+        v-model="user.name"
         class="form-control"
         id="userName"
         placeholder="名前を入力して下さい"
@@ -15,6 +23,7 @@
       <input
         type="email"
         name="userEmail"
+        v-model="user.email"
         class="form-control"
         id="userEmail"
         placeholder="メールアドレスを入力して下さい"
@@ -25,6 +34,7 @@
       <input
         type="password"
         name="userPassword"
+        v-model="user.password"
         class="form-control"
         id="userPassword"
         placeholder="パスワードを入力して下さい"
@@ -35,6 +45,7 @@
       <input
         type="password"
         name="userPasswordConfirmation"
+        v-model="user.password_confirmation"
         class="form-control"
         id="userPasswordConfirmation"
         placeholder="再度パスワード入力して下さい"
@@ -42,6 +53,7 @@
     </div>
     <div class="submit-button-wrapper">
       <input
+        @click="submitUser"
         type="submit"
         value="送信"
         name="submitBtn"
@@ -51,6 +63,50 @@
     </div>
   </div>
 </template>
+
+<script>
+import axios from "axios";
+axios.defaults.headers.common = {
+  "X-Requested-With": "XMLHttpRequest",
+  "X-CSRF-TOKEN": document
+    .querySelector('meta[name="csrf-token"]')
+    .getAttribute("content"),
+};
+export default {
+  data() {
+    return {
+      errors: "",
+      user: {
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
+        user_type: "student",
+      },
+    };
+  },
+  methods: {
+    submitUser() {
+      axios
+        .post("/users", this.user)
+        .then((response) => {
+          console.log(response);
+          const createdUser = response.data;
+          this.$router.push({
+            name: "student_user_show_path",
+            params: { id: createdUser.id },
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .user-form-wrapper {

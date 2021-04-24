@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/teacher/new', to: 'page#index'
   # post '/login', to: 'page#index'
   # delete '/logout', to: 'page#index'
-  # resources :users
+  resources :users
 
   # resources :contact
   # resources :questions, only: [:show,:new,:create, :destroy]
