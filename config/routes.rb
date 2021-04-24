@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   get '/entrance', to: 'page#index'
   get '/register', to: 'page#index'
   get '/students/new', to: 'page#index'
+  get '/students/:id', to: 'page#index'
   get '/teachers/new', to: 'page#index'
+  get '/teachers/:id', to: 'page#index'
   # post '/login', to: 'page#index'
   # delete '/logout', to: 'page#index'
   resources :users
