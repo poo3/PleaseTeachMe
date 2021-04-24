@@ -19,8 +19,8 @@ const router = new VueRouter({
     { path: "/contact", component: Contact, name: "contact_path" },
     { path: "/entrance", component: Entrance, name: "entrance_path" },
     { path: "/register", component: Register, name: "register_path" },
-    { path: "/student/new", component: StudentNew, name: "student_new_path" },
-    { path: "/teacher/new", component: TeacherNew, name: "teacher_new_path" },
+    { path: "/students/new", component: StudentNew, name: "student_new_path" },
+    { path: "/teachers/new", component: TeacherNew, name: "teacher_new_path" },
     {
       path: "/students/:id(\\d+)",
       component: StudentShow,
