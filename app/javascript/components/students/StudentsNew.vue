@@ -93,7 +93,7 @@ export default {
           console.log(response);
           const createdUser = response.data;
           this.$router.push({
-            name: "student_user_show_path",
+            name: "students_user_show_path",
             params: { id: createdUser.id },
           });
         })
