@@ -14,12 +14,21 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user
-      flash[:success] = "ようこそPleaseTeachMeへ！"
-      redirect_to @user
+      # log_in @user
+      render json: @user, status: :created
     else
-      render 'new'
+      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
+    # @user = User.new(user_params)
+    # begin
+    #   @user.save
+    #   log_in @user
+    #   flash[:success] = "ようこそPleaseTeachMeへ！"
+    #   redirect_to @user
+    # rescue => exception
+    #   logger.error(exception.message)
+    #   render 'root'
+    # end
   end
 
   def edit
@@ -39,7 +48,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password,
+    params.permit(:name, :email, :password,
                                  :password_confirmation,:user_type)
   end
   

@@ -6,9 +6,13 @@ Rails.application.routes.draw do
   get '/help', to: 'page#index'
   get '/contact', to: 'page#index'
   get '/login', to: 'page#index'
+  get '/entrance', to: 'page#index'
+  get '/register', to: 'page#index'
+  get '/students/new', to: 'page#index'
+  get '/teachers/new', to: 'page#index'
   # post '/login', to: 'page#index'
   # delete '/logout', to: 'page#index'
-  # resources :users
+  resources :users
 
   # resources :contact
   # resources :questions, only: [:show,:new,:create, :destroy]

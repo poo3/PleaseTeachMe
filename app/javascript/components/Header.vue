@@ -22,8 +22,8 @@
         />
         <div class="usermenu-wrapper" v-show="usermenuActivated">
           <ul>
-            <router-link to="help" tag="li">ログイン</router-link>
-            <router-link to="contact" tag="li">新規登録</router-link>
+            <router-link to="entrance" tag="li">ログイン</router-link>
+            <router-link to="register" tag="li">新規登録</router-link>
           </ul>
         </div>
       </div>
