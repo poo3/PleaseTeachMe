@@ -1,12 +1,12 @@
 <template>
   <div class="usertype-link-wrapper">
     <div class="teacher-link-wrapper">
-      <router-link to="/">
+      <router-link to="/teachers/login">
         <div class="teacher-link">先生はこちら</div>
       </router-link>
     </div>
     <div class="student-link-wrapper">
-      <router-link to="/">
+      <router-link to="/students/login">
         <div class="student-link">生徒はこちら</div>
       </router-link>
     </div>
