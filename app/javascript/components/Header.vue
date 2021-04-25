@@ -8,10 +8,10 @@
       </div>
       <div class="nav-menu-wrapper">
         <div class="nav-menu">
-          <router-link to="help">ヘルプ</router-link>
+          <router-link :to="{ name: `help_path` }">ヘルプ</router-link>
         </div>
         <div class="nav-menu">
-          <router-link to="contact">お問い合わせ</router-link>
+          <router-link :to="{ name: `contact_path` }">お問い合わせ</router-link>
         </div>
       </div>
       <div class="nav-usermenu">
@@ -22,8 +22,12 @@
         />
         <div class="usermenu-wrapper" v-show="usermenuActivated">
           <ul>
-            <router-link to="entrance" tag="li">ログイン</router-link>
-            <router-link to="register" tag="li">新規登録</router-link>
+            <router-link :to="{ name: `entrance_path` }" tag="li"
+              >ログイン</router-link
+            >
+            <router-link :to="{ name: `register_path` }" tag="li"
+              >新規登録</router-link
+            >
           </ul>
         </div>
       </div>
