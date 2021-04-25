@@ -28,7 +28,7 @@ export default {
         if (response.data.current_user) {
           this.user = response.data.user;
         } else {
-          this.$emit("getMessage", response.data.message);
+          this.$emit("catchMessage", response.data.message);
           this.$router.push({
             name: "entrance_path",
             params: { message: response.data.message },
