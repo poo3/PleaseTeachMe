@@ -15,13 +15,17 @@ class UsersController < ApplicationController
     # @user = User.find(params[:id])
     # @questions = @user.questions.paginate(page:params[:page], per_page:9)
     @user = User.find(params[:id])
-    render json: @user
+    if current_user?(@user)
+      render json: {user: @user,current_user: true}
+    else
+      render template: "sessions/new", json:{message: "ログインして下さい",current_user: false}
+    end
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
-      # log_in @user
+      log_in @user
       render json: @user, status: :created
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity

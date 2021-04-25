@@ -25,7 +25,15 @@ export default {
       .get(`/users/${this.$route.params.id}`)
       .then((response) => {
         console.log(response);
-        this.user = response.data;
+        if (response.data.current_user) {
+          this.user = response.data.user;
+        } else {
+          this.$emit("getMessage", response.data.message);
+          this.$router.push({
+            name: "entrance_path",
+            params: { message: response.data.message },
+          });
+        }
       })
       .catch((error) => {
         console.log(error);

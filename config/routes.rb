@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/teachers/new', to: 'page#index'
   get '/teachers/:id', to: 'page#index'
   get '/teachers/login', to: 'page#index'
-  # post '/login', to: 'page#index'
+  post '/login', to: 'sessions#create'
   # delete '/logout', to: 'page#index'
   resources :users
 
