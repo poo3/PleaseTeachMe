@@ -9,6 +9,8 @@ import StudentsNew from "../components/students/StudentsNew";
 import TeachersNew from "../components/teachers/TeachersNew";
 import StudentsShow from "../components/students/StudentsShow";
 import TeachersShow from "../components/teachers/TeachersShow";
+import StudentsLogin from "../components/students/StundentsLogin";
+import TeachersLogin from "../components/teachers/TeachersLogin";
 
 Vue.use(VueRouter);
 
@@ -39,6 +41,16 @@ const router = new VueRouter({
       path: "/teachers/:id(\\d+)",
       component: TeachersShow,
       name: "teachers_user_show_path",
+    },
+    {
+      path: "/students/login",
+      component: StudentsLogin,
+      name: "students_user_login_path",
+    },
+    {
+      path: "/teachers/login",
+      component: TeachersLogin,
+      name: "teachers_user_login_path",
     },
   ],
 });

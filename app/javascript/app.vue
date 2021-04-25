@@ -1,7 +1,10 @@
 <template>
   <div @click="usermenuClose">
     <Header ref="header"></Header>
-    <router-view></router-view>
+    <div class="flash-message" v-if="message != ``">
+      {{ message }}
+    </div>
+    <router-view @catchMessage="updateMessage"></router-view>
     <Footer></Footer>
   </div>
 </template>
@@ -12,7 +15,7 @@ import Footer from "components/Footer";
 export default {
   data: function () {
     return {
-      message: "Hello Vue!",
+      message: "",
     };
   },
   components: {
@@ -31,6 +34,12 @@ export default {
         this.$refs.header.usermenuToggle();
       }
     },
+    updateMessage(message) {
+      this.message = message;
+      setTimeout(() => {
+        this.message = "";
+      }, 5000);
+    },
   },
 };
 </script>
@@ -39,5 +48,9 @@ export default {
 p {
   font-size: 2em;
   text-align: center;
+}
+.flash-message {
+  text-align: center;
+  color: red;
 }
 </style>

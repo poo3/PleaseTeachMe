@@ -10,9 +10,11 @@ Rails.application.routes.draw do
   get '/register', to: 'page#index'
   get '/students/new', to: 'page#index'
   get '/students/:id', to: 'page#index'
+  get '/students/login',to: 'page#index'
   get '/teachers/new', to: 'page#index'
   get '/teachers/:id', to: 'page#index'
-  # post '/login', to: 'page#index'
+  get '/teachers/login', to: 'page#index'
+  post '/login', to: 'sessions#create'
   # delete '/logout', to: 'page#index'
   resources :users
 
