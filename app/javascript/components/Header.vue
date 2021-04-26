@@ -28,6 +28,7 @@
             <router-link :to="{ name: `register_path` }" tag="li"
               >新規登録</router-link
             >
+            <li @click="logout">ログアウト</li>
           </ul>
         </div>
       </div>
@@ -39,6 +40,13 @@
 import "please_teach_me.png";
 import "user-menu-logo.png";
 import "PleaseTeachMe-background-home.png";
+import axios from "axios";
+axios.defaults.headers.common = {
+  "X-Requested-With": "XMLHttpRequest",
+  "X-CSRF-TOKEN": document
+    .querySelector('meta[name="csrf-token"]')
+    .getAttribute("content"),
+};
 export default {
   data() {
     return { usermenuActivated: false };
@@ -50,6 +58,16 @@ export default {
       const usermenuElement = document.querySelector(".usermenu-wrapper");
       usermenuElement.classList.toggle("usermenu--active");
       this.usermenuActivated = !this.usermenuActivated;
+    },
+    logout() {
+      axios.delete("/logout").then((response) => {
+        console.log(response);
+        this.$emit("catchMessage", response.data.message);
+        this.$router.push({
+          name: "home_path",
+          params: { message: response.data.message },
+        });
+      });
     },
   },
 };
