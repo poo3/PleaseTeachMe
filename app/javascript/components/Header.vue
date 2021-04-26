@@ -62,7 +62,11 @@ export default {
     logout() {
       axios.delete("/logout").then((response) => {
         console.log(response);
-        this.$emit("catchMessage", response.data.message);
+        console.log(this);
+        this.$store.dispatch("catchMessage", {
+          message: response.data.message,
+          timeout: 5000,
+        });
         this.$router.push({
           name: "home_path",
           params: { message: response.data.message },

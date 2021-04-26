@@ -14,16 +14,15 @@ require("custom/contact");
 import "@fortawesome/fontawesome-free/js/all";
 
 import Vue from "vue/dist/vue.esm";
-import Router from "./router";
 import App from "../app";
-import Vuex from "../store/store";
-import { Store } from "vuex";
+import router from "./router";
+import store from "../store";
 
 document.addEventListener("DOMContentLoaded", () => {
   const app = new Vue({
     el: "#app",
-    router: Router,
-    store: Store,
+    router: router,
+    store: store,
     render: (h) => h(App),
   });
 });
