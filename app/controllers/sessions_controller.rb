@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       log_in user
       # params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       flash[:success] = 'ログインに成功しました！'
-      render json: user
+      render json: {user: user,message: "ログインに成功しました！"}
     else
       flash.now[:danger] = 'ログインできませんでした正しい情報を入力してください'
       # render 'new'

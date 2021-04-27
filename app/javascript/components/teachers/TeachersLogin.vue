@@ -64,7 +64,11 @@ export default {
         .post("/login", this.session)
         .then((response) => {
           console.log(response);
-          const loggedinUser = response.data;
+          const loggedinUser = response.data.user;
+          this.$store.dispatch("catchMessage", {
+            message: response.data.message,
+            timeout: 5000,
+          });
           this.$router.push({
             name: "teachers_user_show_path",
             params: { id: loggedinUser.id },
