@@ -24,6 +24,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out if logged_in?
-    redirect_to root_url
+    render json: {message: "ログアウトしました" }
+    # redirect_to root_url
   end
 end

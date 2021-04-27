@@ -1,9 +1,7 @@
 <template>
   <div @click="usermenuClose">
     <Header ref="header"></Header>
-    <div class="flash-message" v-if="message != ``">
-      {{ message }}
-    </div>
+    <Message></Message>
     <router-view @catchMessage="updateMessage"></router-view>
     <Footer></Footer>
   </div>
@@ -12,6 +10,7 @@
 <script>
 import Header from "components/Header";
 import Footer from "components/Footer";
+import Message from "components/Message";
 export default {
   data: function () {
     return {
@@ -21,6 +20,7 @@ export default {
   components: {
     Header,
     Footer,
+    Message,
   },
   methods: {
     // usermenuToggle

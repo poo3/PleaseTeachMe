@@ -27,17 +27,17 @@
 //   });
 // });
 //
-import Vue from "vue/dist/vue.esm";
-import router from "./router";
-import App from "../app";
+// import Vue from "vue/dist/vue.esm";
+// import router from "./router";
+// import App from "../app";
 
-document.addEventListener("DOMContentLoaded", () => {
-  const app = new Vue({
-    el: "#app",
-    router,
-    render: (h) => h(App),
-  });
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   const app = new Vue({
+//     el: "#app",
+//     router,
+//     render: (h) => h(App),
+//   });
+// });
 
 // The above code uses Vue without the compiler, which means you cannot
 // use Vue to target elements in your existing html templates. You would
