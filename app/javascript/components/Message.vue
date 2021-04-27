@@ -20,3 +20,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.message {
+  text-align: center;
+  color: red;
+  font-size: 1.5rem;
+}
+</style>
