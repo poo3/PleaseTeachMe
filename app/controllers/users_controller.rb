@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      render json: @user, status: :created
+      render json: {user: @user,message: "#{@user.name}様ようこそPleaseTeachmeへ"}, status: :created
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end

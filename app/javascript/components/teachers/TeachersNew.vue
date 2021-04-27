@@ -2,8 +2,8 @@
   <div class="user-form-wrapper">
     <div v-if="errors.length != 0">
       <ul v-for="e in errors" :key="e">
-        <li>
-          <font color="red">{{ e }}</font>
+        <li class="vlidate-message">
+          {{ e }}
         </li>
       </ul>
     </div>
@@ -91,7 +91,11 @@ export default {
         .post("/users", this.user)
         .then((response) => {
           console.log(response);
-          const createdUser = response.data;
+          const createdUser = response.data.user;
+          this.$store.dispatch("catchMessage", {
+            message: response.data.message,
+            timeout: 5000,
+          });
           this.$router.push({
             name: "teachers_user_show_path",
             params: { id: createdUser.id },
@@ -109,6 +113,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.vlidate-message {
+  color: red;
+  text-align: center;
+}
 .user-form-wrapper {
   > .form-group {
     height: 2rem;

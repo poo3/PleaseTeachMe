@@ -1,8 +1,5 @@
 <template>
   <div class="user-form-wrapper">
-    <div v-if="error" class="error login-error">
-      <p>ログインできませんでした。正しい情報を入力してください</p>
-    </div>
     <h1>先生ログインページ</h1>
     <div class="form-group">
       <label for="userEmail">メールアドレス</label>
@@ -64,7 +61,11 @@ export default {
         .post("/login", this.session)
         .then((response) => {
           console.log(response);
-          const loggedinUser = response.data;
+          const loggedinUser = response.data.user;
+          this.$store.dispatch("catchMessage", {
+            message: response.data.message,
+            timeout: 5000,
+          });
           this.$router.push({
             name: "teachers_user_show_path",
             params: { id: loggedinUser.id },
@@ -72,7 +73,10 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.error = true;
+          this.$store.dispatch("catchMessage", {
+            message: error.response.data.message,
+            timeout: 5000,
+          });
         });
     },
   },
