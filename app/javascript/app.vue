@@ -2,7 +2,7 @@
   <div @click="usermenuClose">
     <Header ref="header"></Header>
     <Message></Message>
-    <router-view @catchMessage="updateMessage"></router-view>
+    <router-view></router-view>
     <Footer></Footer>
   </div>
 </template>
@@ -33,12 +33,6 @@ export default {
       } else {
         this.$refs.header.usermenuToggle();
       }
-    },
-    updateMessage(message) {
-      this.message = message;
-      setTimeout(() => {
-        this.message = "";
-      }, 5000);
     },
   },
 };
