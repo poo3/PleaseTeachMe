@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     else
       flash.now[:danger] = 'ログインできませんでした正しい情報を入力してください'
       # render 'new'
-      render json: { error: 'ログインできませんでした正しい情報を入力してください'}, status: :unprocessable_entity
+      render json: { message: 'ログインできませんでした正しい情報を入力してください'}, status: :unprocessable_entity
     end
   end
 

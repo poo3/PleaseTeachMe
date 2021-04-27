@@ -1,8 +1,5 @@
 <template>
   <div class="user-form-wrapper">
-    <div v-if="error" class="error login-error">
-      <p>ログインできませんでした。正しい情報を入力してください</p>
-    </div>
     <h1>生徒ログインページ</h1>
     <div class="form-group">
       <label for="userEmail">メールアドレス</label>
@@ -76,7 +73,10 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.error = true;
+          this.$store.dispatch("catchMessage", {
+            message: error.response.data.message,
+            timeout: 5000,
+          });
         });
     },
   },
