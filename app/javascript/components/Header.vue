@@ -22,13 +22,16 @@
         />
         <div class="usermenu-wrapper" v-show="usermenuActivated">
           <ul>
-            <router-link :to="{ name: `entrance_path` }" tag="li"
+            <router-link
+              :to="{ name: `entrance_path` }"
+              tag="li"
+              v-if="!loggedIn"
               >ログイン</router-link
             >
             <router-link :to="{ name: `register_path` }" tag="li"
               >新規登録</router-link
             >
-            <li @click="logout">ログアウト</li>
+            <li @click="logout" v-if="loggedIn">ログアウト</li>
           </ul>
         </div>
       </div>
@@ -52,7 +55,11 @@ export default {
     return { usermenuActivated: false };
   },
   created: {},
-  computed: {},
+  computed: {
+    loggedIn() {
+      return this.$store.state.userLoggedIn;
+    },
+  },
   methods: {
     usermenuToggle() {
       const usermenuElement = document.querySelector(".usermenu-wrapper");
@@ -67,6 +74,7 @@ export default {
           message: response.data.message,
           timeout: 5000,
         });
+        this.$store.dispatch("changeLogout");
         this.$router.push({
           name: "home_path",
           params: { message: response.data.message },
