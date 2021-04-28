@@ -96,6 +96,7 @@ export default {
             message: response.data.message,
             timeout: 5000,
           });
+          this.$store.dispatch("changeLogin");
           this.$router.push({
             name: "students_user_show_path",
             params: { id: createdUser.id },
