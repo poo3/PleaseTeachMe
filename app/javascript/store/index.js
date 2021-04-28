@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     flashMessage: "",
+    userLoggedIn: "",
   },
   mutations: {
     setMessage(state, { message, timeout }) {
@@ -16,6 +17,12 @@ export default new Vuex.Store({
 
       setTimeout(() => (state.flashMessage = ""), timeout);
     },
+    login(state) {
+      state.userLoggedIn = true;
+    },
+    logout(state) {
+      state.userLoggedIn = false;
+    },
   },
   actions: {
     catchMessage({ commit }, { message, timeout }) {
@@ -23,6 +30,12 @@ export default new Vuex.Store({
         message: message,
         timeout: timeout,
       });
+    },
+    changeLogin({ commit }) {
+      commit("login");
+    },
+    changeLogout({ commit }) {
+      commit("logout");
     },
   },
 });
