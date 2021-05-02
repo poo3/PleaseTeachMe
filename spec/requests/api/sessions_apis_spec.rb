@@ -20,5 +20,15 @@ RSpec.describe 'Api::SessionsApis', type: :request do
       )
       expect(json).to include('message')
     end
+
+    let(:invalid_session_params) do
+      { session: { email: 'invalid_email', password: 'invalid_password' } }
+    end
+    it 'セッション作成が失敗すること' do
+      post '/login', params: invalid_session_params
+      expect(response).to have_http_status(:unprocessable_entity)
+      json = JSON.parse(response.body)
+      expect(json).to include('message')
+    end
   end
 end
