@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::SessionsApis', type: :request do
+  include SessionsHelper
   describe 'POST /login' do
     user = FactoryBot.create(:user)
     let(:session_params) do
@@ -9,6 +10,7 @@ RSpec.describe 'Api::SessionsApis', type: :request do
     it 'セッション作成が成功すること' do
       post '/login', params: session_params
       expect(response).to have_http_status(:created)
+      expect(logged_in?).to be_truthy
       json = JSON.parse(response.body)
       expect(json['user']).to include(
         {
