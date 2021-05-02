@@ -9,7 +9,9 @@ Rails.logger = Logger.new(STDOUT) # Rails.loggerを出す
 # ActiveRecord::Base.logger = Logger.new(STDOUT) # SQLログ出す
 
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+if Rails.env.production?
+  abort('The Rails environment is running in production mode!')
+end
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -42,10 +44,13 @@ RSpec.configure do |config|
 
   # login用helper
   config.include LoginSupport
+
   # 質問投稿helper
   config.include PostQuestionsSupport
+
   #クッキーをテストの最中に見ることができる
-  config.include ShowMeTheCookies, :type => :system
+  config.include ShowMeTheCookies, type: :system
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -68,21 +73,18 @@ RSpec.configure do |config|
 
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
+
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
   # Setup to run system spec
-  # 
-  
+  #
+
   # 省略
   # Setup to run system spec
-  config.before(:each, type: :system) do
-    driven_by :selenium_chrome
-  end
+  config.before(:each, type: :system) { driven_by :selenium_chrome }
 
-  config.before(:each, type: :system, js: true) do
-    driven_by :selenium_chrome
-  end
+  config.before(:each, type: :system, js: true) { driven_by :selenium_chrome }
 
   # config.before(:each, type: :system) do
   #   driven_by :rack_test
