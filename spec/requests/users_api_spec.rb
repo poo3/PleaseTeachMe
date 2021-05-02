@@ -13,7 +13,7 @@ RSpec.describe 'UsersApi', type: :request do
     }
   end
 
-  it '先生ユーザを作成できる事' do
+  it 'ユーザを作成できる事' do
     expect { post users_path, params: user_params }.to change { User.count }.by(
       1,
     )
@@ -44,12 +44,12 @@ RSpec.describe 'UsersApi', type: :request do
         email: 'test@example.com',
         password: 'password',
         password_confirmation: 'password',
-        user_type: 'teacher',
+        user_type: 'student',
       },
     }
   end
 
-  it '先生ユーザを作成に失敗すること' do
+  it 'ユーザを作成に失敗すること' do
     expect { post users_path, params: invalid_user_params }.to change {
       User.count
     }.by(0)
