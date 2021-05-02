@@ -5,6 +5,9 @@ ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path('../config/environment', __dir__)
 
+Rails.logger = Logger.new(STDOUT) # Rails.loggerを出す
+# ActiveRecord::Base.logger = Logger.new(STDOUT) # SQLログ出す
+
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
