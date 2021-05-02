@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::SessionsApis', type: :request do
+  # logged_in?を利用するためにsessionヘルパーをインクルード
   include SessionsHelper
   describe 'POST /login' do
     user = FactoryBot.create(:user)
