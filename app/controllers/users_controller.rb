@@ -23,12 +23,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      log_in @user
-      render json: {user: @user,message: "#{@user.name}様ようこそPleaseTeachmeへ"}, status: :created
+    user = User.new(user_params)
+    if user.save!
+      log_in user
+      render json: {user: user,message: "#{user.name}様ようこそPleaseTeachmeへ"}, status: :created
     else
-      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
     end
     # @user = User.new(user_params)
     # begin
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:name, :email, :password,
+    params.require(:user).permit(:name, :email, :password,
                                  :password_confirmation,:user_type)
   end
   
