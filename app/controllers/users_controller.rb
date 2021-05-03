@@ -12,11 +12,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    # @user = User.find(params[:id])
-    # @questions = @user.questions.paginate(page:params[:page], per_page:9)
-    @user = User.find(params[:id])
-    if current_user?(@user)
-      render json: { user: @user, current_user: true }
+    user = User.find(params[:id])
+    if current_user?(user)
+      render json: { user: safe_user(user), current_user: true }
     else
       render template: 'sessions/new',
              json: {
@@ -31,7 +29,7 @@ class UsersController < ApplicationController
     if user.save
       log_in user
       render json: {
-               user: user,
+               user: safe_user(user),
                message: "#{user.name}様ようこそPleaseTeachmeへ",
              },
              status: :created
@@ -41,16 +39,6 @@ class UsersController < ApplicationController
              },
              status: :unprocessable_entity
     end
-    # @user = User.new(user_params)
-    # begin
-    #   @user.save
-    #   log_in @user
-    #   flash[:success] = "ようこそPleaseTeachMeへ！"
-    #   redirect_to @user
-    # rescue => exception
-    #   logger.error(exception.message)
-    #   render 'root'
-    # end
   end
 
   def edit
@@ -73,6 +61,17 @@ class UsersController < ApplicationController
     params
       .require(:user)
       .permit(:name, :email, :password, :password_confirmation, :user_type)
+  end
+
+  def safe_user(user)
+    return(
+      {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        user_type: user.user_type,
+      }
+    )
   end
 
   # beforeアクション
