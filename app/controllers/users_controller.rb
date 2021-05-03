@@ -12,11 +12,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    # @user = User.find(params[:id])
-    # @questions = @user.questions.paginate(page:params[:page], per_page:9)
-    @user = User.find(params[:id])
-    if current_user?(@user)
-      render json: { user: @user, current_user: true }
+    user = User.find(params[:id])
+    if current_user?(user)
+      render json: { user: safe_user(user), current_user: true }
     else
       render template: 'sessions/new',
              json: {
