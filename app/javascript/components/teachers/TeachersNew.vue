@@ -88,7 +88,7 @@ export default {
   methods: {
     submitUser() {
       axios
-        .post("/users", this.user)
+        .post("/users", {user: this.user})
         .then((response) => {
           console.log(response);
           const createdUser = response.data.user;
