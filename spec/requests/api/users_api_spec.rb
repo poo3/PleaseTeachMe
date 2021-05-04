@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'UsersApi', type: :request do
-  describe 'POST /users' do
+  describe 'POST /api/users' do
     let(:user_params) do
       {
         user: {
@@ -15,7 +15,7 @@ RSpec.describe 'UsersApi', type: :request do
     end
 
     it 'ユーザを作成できる事' do
-      expect { post users_path, params: user_params }.to change {
+      expect { post api_users_path, params: user_params }.to change {
         User.count
       }.by(1)
 
@@ -51,7 +51,7 @@ RSpec.describe 'UsersApi', type: :request do
     end
 
     it 'ユーザを作成に失敗すること' do
-      expect { post users_path, params: invalid_user_params }.to change {
+      expect { post api_users_path, params: invalid_user_params }.to change {
         User.count
       }.by(0)
 
