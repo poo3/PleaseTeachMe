@@ -22,7 +22,7 @@ export default {
   },
   mounted() {
     axios
-      .get(`/users/${this.$route.params.id}`)
+      .get(`/api/users/${this.$route.params.id}`)
       .then((response) => {
         console.log(response);
         if (response.data.current_user) {

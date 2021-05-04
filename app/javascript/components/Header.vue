@@ -67,7 +67,7 @@ export default {
       this.usermenuActivated = !this.usermenuActivated;
     },
     logout() {
-      axios.delete("/logout").then((response) => {
+      axios.delete("/api/logout").then((response) => {
         console.log(response);
         console.log(this);
         this.$store.dispatch("catchMessage", {

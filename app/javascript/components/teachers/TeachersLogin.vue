@@ -58,7 +58,7 @@ export default {
   methods: {
     submitUser() {
       axios
-        .post("/login", this.session)
+        .post("/api/login", this.session)
         .then((response) => {
           console.log(response);
           const loggedinUser = response.data.user;
