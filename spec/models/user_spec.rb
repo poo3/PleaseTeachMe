@@ -98,4 +98,22 @@ RSpec.describe User, type: :model do
     @user.questions.create!(title: "TestTitle",content: "testcontents!!")
     expect{ @user.destroy }.to change{ Question.count}.by(-1)
   end
+
+  it "user_typeがstudentの時" do
+    @user.user_type = "student"
+    @user.valid?
+    expect(@user).to be_valid
+  end
+
+  it "user_typeがteacherの時" do
+    @user.user_type = "teacher"
+    @user.valid?
+    expect(@user).to be_valid
+  end
+
+  it "user_typeに無効な値（teacher,student以外）が渡された時" do
+    @user.user_type = "invalid_value"
+    @user.valid?
+    expect(@user).to_not be_valid
+  end
 end
