@@ -2,13 +2,13 @@ Rails
   .application
   .routes
   .draw do
-    # get 'page/index'
+    namespace :api do
+      resources :users
+      post '/login', to: 'sessions#create'
+      delete '/logout', to: 'sessions#destroy'
+    end
     root 'page#index'
     get '*path', to: 'page#index'
-    post '/login', to: 'sessions#create'
-    delete '/logout', to: 'sessions#destroy'
-    resources :users
-
     # resources :contact
     # resources :questions, only: [:show,:new,:create, :destroy]
   end
