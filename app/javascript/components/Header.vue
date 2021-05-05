@@ -28,6 +28,15 @@
               v-if="!loggedIn"
               >ログイン</router-link
             >
+            <router-link
+              :to="{
+                name: `teachers_user_show_path`,
+                params: { id: this.$store.state.currentUser.id },
+              }"
+              tag="li"
+              v-if="loggedIn"
+              >マイページ</router-link
+            >
             <router-link :to="{ name: `register_path` }" tag="li"
               >新規登録</router-link
             >
