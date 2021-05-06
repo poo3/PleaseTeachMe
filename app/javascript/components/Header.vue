@@ -31,7 +31,7 @@
             <router-link
               :to="{
                 name: `teachers_user_show_path`,
-                params: { id: this.$store.state.currentUser.id },
+                params: { id: currentUserId },
               }"
               tag="li"
               v-if="loggedIn"
@@ -66,7 +66,12 @@ export default {
   created: {},
   computed: {
     loggedIn() {
-      return this.$store.state.userLoggedIn;
+      return this.$store.state.userInfo.userLoggedIn;
+    },
+    currentUserId() {
+      if (this.$store.state.userInfo.currentUser) {
+        return this.$store.state.userInfo.currentUser.id;
+      }
     },
   },
   methods: {
@@ -79,11 +84,11 @@ export default {
       axios.delete("/api/logout").then((response) => {
         console.log(response);
         console.log(this);
-        this.$store.dispatch("catchMessage", {
+        this.$store.dispatch("flashMessage/catchMessage", {
           message: response.data.message,
           timeout: 5000,
         });
-        this.$store.dispatch("changeLogout");
+        this.$store.dispatch("userInfo/changeLogout");
         this.$router.push({
           name: "home_path",
           params: { message: response.data.message },

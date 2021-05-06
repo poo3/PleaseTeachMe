@@ -15,7 +15,7 @@ export default {
   computed: {
     //メッセージストアのステートにセットされてある「メッセージ内容」を返す
     flashMessage() {
-      return this.$store.state.flashMessage;
+      return this.$store.state.flashMessage.flashMessage;
     },
   },
 };

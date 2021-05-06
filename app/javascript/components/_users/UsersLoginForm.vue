@@ -61,11 +61,11 @@ export default {
         .then((response) => {
           console.log(response);
           const loggedinUser = response.data.user;
-          this.$store.dispatch("catchMessage", {
+          this.$store.dispatch("flashMessage/catchMessage", {
             message: response.data.message,
             timeout: 5000,
           });
-          this.$store.dispatch("changeLogin", loggedinUser);
+          this.$store.dispatch("userInfo/changeLogin", loggedinUser);
           this.$router.push({
             name: "teachers_user_show_path",
             params: { id: loggedinUser.id },
@@ -73,7 +73,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$store.dispatch("catchMessage", {
+          this.$store.dispatch("flashMessage/catchMessage", {
             message: error.response.data.message,
             timeout: 5000,
           });
