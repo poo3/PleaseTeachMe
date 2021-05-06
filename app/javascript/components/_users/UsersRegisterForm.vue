@@ -93,11 +93,11 @@ export default {
         .then((response) => {
           console.log(response);
           const createdUser = response.data.user;
-          this.$store.dispatch("catchMessage", {
+          this.$store.dispatch("flashMessage/catchMessage", {
             message: response.data.message,
             timeout: 5000,
           });
-          this.$store.dispatch("changeLogin");
+          this.$store.dispatch("userInfo/changeLogin");
           this.$router.push({
             name: "teachers_user_show_path",
             params: { id: createdUser.id },
