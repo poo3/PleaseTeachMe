@@ -1,4 +1,10 @@
 class Api::UsersController < ApplicationController
+  # 拾えなかったExceptionが発生したら500 Internal server errorを応答する
+  rescue_from Exception, with: :render_status_500
+
+  # ActiveRecordのレコードが見つからなければ404 not foundを応答する
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+
   before_action :logged_in_user, only: %i[edit update]
   before_action :correct_user, only: %i[edit update]
 
@@ -80,5 +86,14 @@ class Api::UsersController < ApplicationController
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
+  end
+
+  # 例外発生時に実行するメソッド
+  def render_not_found
+    render json: {}, status: :not_found
+  end
+
+  def render_status_500
+    render json: {}, status: :internal_server_error
   end
 end
