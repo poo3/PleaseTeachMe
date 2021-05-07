@@ -1,5 +1,6 @@
 import Vue from "vue/dist/vue.esm";
 import VueRouter from "vue-router";
+// コンポーネント読み込み
 import Home from "../components/staticpages/Home";
 import Help from "../components/staticpages/Help";
 import Contact from "../components/staticpages/Contact";
@@ -7,12 +8,12 @@ import Entrance from "../components/sessions/Entrance";
 import Register from "../components/sessions/Register";
 import StudentsNew from "../components/students/StudentsNew";
 import TeachersNew from "../components/teachers/TeachersNew";
-import StudentsShow from "../components/students/StudentsShow";
-import TeachersShow from "../components/teachers/TeachersShow";
 import StudentsLogin from "../components/students/StundentsLogin";
 import TeachersLogin from "../components/teachers/TeachersLogin";
 
 Vue.use(VueRouter);
+// モジュール読み込み
+import authUserPage from "./routerModules/authUserPage";
 
 const router = new VueRouter({
   mode: "history",
@@ -32,16 +33,7 @@ const router = new VueRouter({
       component: TeachersNew,
       name: "teachers_new_path",
     },
-    {
-      path: "/students/:id(\\d+)",
-      component: StudentsShow,
-      name: "students_user_show_path",
-    },
-    {
-      path: "/teachers/:id(\\d+)",
-      component: TeachersShow,
-      name: "teachers_user_show_path",
-    },
+    ...authUserPage,
     {
       path: "/students/login",
       component: StudentsLogin,
