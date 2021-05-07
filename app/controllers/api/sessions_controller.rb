@@ -7,6 +7,15 @@ class Api::SessionsController < ApplicationController
 
   def new; end
 
+  def auth_conf
+    user = User.find(params[:id])
+    if current_user?(user)
+      render json:{}, status: :ok
+    else
+      render json:{},status: :unauthorized
+    end
+  end
+
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user&.authenticate(params[:session][:password])
