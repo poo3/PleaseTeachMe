@@ -30,7 +30,7 @@
             >
             <router-link
               :to="{
-                name: `teachers_user_show_path`,
+                name: `${currentUserType}s_user_show_path`,
                 params: { id: currentUserId },
               }"
               tag="li"
@@ -80,6 +80,11 @@ export default {
     currentUserId() {
       if (this.$store.state.userInfo.currentUser) {
         return this.$store.state.userInfo.currentUser.id;
+      }
+    },
+    currentUserType() {
+      if (this.$store.state.userInfo.currentUser) {
+        return this.$store.state.userInfo.currentUser.user_type;
       }
     },
   },
