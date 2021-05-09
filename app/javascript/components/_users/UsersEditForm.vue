@@ -51,9 +51,9 @@
     </div>
     <div class="submit-button-wrapper">
       <input
-        @click="submitUser"
+        @click="updateUser"
         type="submit"
-        value="送信"
+        value="更新"
         name="submitBtn"
         class="btn btn-submit"
         id="submitBtn"
@@ -93,7 +93,7 @@ export default {
     }
   },
   methods: {
-    submitUser() {
+    updateUser() {
       axios
         .patch(`/api/users/${this.$route.params.id}`, {
           user: this.user,
