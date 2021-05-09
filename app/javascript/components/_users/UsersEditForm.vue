@@ -93,12 +93,16 @@ export default {
     }
   },
   methods: {
+    passwordRefresh() {
+      (this.user.password = ""), (this.user.password_confirmation = "");
+    },
     updateUser() {
       axios
         .patch(`/api/users/${this.$route.params.id}`, {
           user: this.user,
         })
         .then((response) => {
+          this.passwordRefresh();
           console.log(response);
           const updatedUser = response.data.user;
           console.log(updatedUser);
@@ -109,6 +113,7 @@ export default {
           this.$store.dispatch("userInfo/updateUser", updatedUser);
         })
         .catch((error) => {
+          this.passwordRefresh();
           console.error(error);
           console.log(error.response);
           this.$store.dispatch("flashMessage/catchMessage", {
