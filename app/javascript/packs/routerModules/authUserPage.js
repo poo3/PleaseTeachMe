@@ -16,7 +16,7 @@ export default [
       console.log("beforeEnter");
       if (store.state.userInfo.userLoggedIn) {
         console.log("LoggedIn");
-        console.log(store.state.userInfo.currentUser.idf);
+        console.log(store.state.userInfo.currentUser.id);
         axios
           .post("/api/auth_conf", {
             id: to.params.id,
@@ -48,7 +48,7 @@ export default [
       console.log("beforeEnter");
       if (store.state.userInfo.userLoggedIn) {
         console.log("LoggedIn");
-        console.log(store.state.userInfo.currentUser.idf);
+        console.log(store.state.userInfo.currentUser.id);
         axios
           .post("/api/auth_conf", {
             id: to.params.id,
@@ -80,7 +80,7 @@ export default [
       console.log("beforeEnter");
       if (store.state.userInfo.userLoggedIn) {
         console.log("LoggedIn");
-        console.log(store.state.userInfo.currentUser.idf);
+        console.log(store.state.userInfo.currentUser.id);
         axios
           .post("/api/auth_conf", {
             id: to.params.id,
@@ -112,7 +112,7 @@ export default [
       console.log("beforeEnter");
       if (store.state.userInfo.userLoggedIn) {
         console.log("LoggedIn");
-        console.log(store.state.userInfo.currentUser.idf);
+        console.log(store.state.userInfo.currentUser.id);
         axios
           .post("/api/auth_conf", {
             id: to.params.id,
