@@ -50,7 +50,7 @@ RSpec.describe 'UsersApi', type: :request do
       }
     end
 
-    it 'ユーザを作成に失敗すること' do
+    it 'ユーザの作成に失敗すること' do
       expect { post api_users_path, params: invalid_user_params }.to change {
         User.count
       }.by(0)
@@ -61,6 +61,65 @@ RSpec.describe 'UsersApi', type: :request do
 
       # エラーの情報がレスポンスされているかチェック
       expect(json['errors']).not_to be_empty
+    end
+  end
+
+  describe 'PATCH`/api/users/${this.$route.params.id}`' do
+    user = FactoryBot.create(:user)
+    let(:session_params) do
+      { session: { email: user.email, password: user.password } }
+    end
+    let(:valid_user_updated_params) do
+      {
+        user: {
+          name: 'edituser',
+          email: 'edituser@example.com',
+          password: 'editpassword',
+          password_confirmation: 'editpassword',
+          user_type: user.user_type,
+        },
+        id: user.id,
+      }
+    end
+    let(:invalid_user_updated_params) do
+      {
+        user: {
+          name: 'edituser',
+          email: 'edituser@example.com',
+          password: 'editpassword',
+          password_confirmation: 'editpassword_invalid',
+          user_type: user.user_type,
+        },
+        id: user.id,
+      }
+    end
+
+    it 'ユーザの更新に成功すること' do
+      # ログインしておく
+      post '/api/login', params: session_params
+
+      patch api_user_path(user), params: valid_user_updated_params
+      expect(response).to have_http_status(:ok)
+      json = JSON.parse(response.body)
+      expect(json['user']).to include(
+        {
+          'id' => user.id,
+          'name' => 'edituser',
+          'email' => 'edituser@example.com',
+          'user_type' => 'student',
+        },
+      )
+      expect(json).to include({ 'message' => '情報を更新しました！！' })
+    end
+    it 'ユーザの更新に失敗すること' do
+      # ログインしておく
+      post '/api/login', params: session_params
+
+      patch api_user_path(user), params: invalid_user_updated_params
+      expect(response).to have_http_status(:bad_request)
+      json = JSON.parse(response.body)
+
+      expect(json).to include({ 'message' => '編集に失敗しました' })
     end
   end
 end
