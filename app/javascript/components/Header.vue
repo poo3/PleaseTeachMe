@@ -37,6 +37,15 @@
               v-if="loggedIn"
               >マイページ</router-link
             >
+            <router-link
+              :to="{
+                name: `teachers_user_edit_path`,
+                params: { id: currentUserId },
+              }"
+              tag="li"
+              v-if="loggedIn"
+              >登録内容編集</router-link
+            >
             <router-link :to="{ name: `register_path` }" tag="li"
               >新規登録</router-link
             >

@@ -13,6 +13,10 @@ export default {
       state.userLoggedIn = false;
       state.currentUser = {};
     },
+    update(state, updatedUser) {
+      state.userLoggedIn = true;
+      state.currentUser = updatedUser;
+    },
   },
   actions: {
     changeLogin({ commit }, loginUser) {
@@ -20,6 +24,9 @@ export default {
     },
     changeLogout({ commit }) {
       commit("logout");
+    },
+    updateUser({ commit }, updatedUser) {
+      commit("update", updatedUser);
     },
   },
 };

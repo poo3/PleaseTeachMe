@@ -15,7 +15,6 @@
         v-model="user.name"
         class="form-control"
         id="userName"
-        placeholder="名前を入力して下さい"
       />
     </div>
     <div class="form-group">
@@ -26,7 +25,6 @@
         v-model="user.email"
         class="form-control"
         id="userEmail"
-        placeholder="メールアドレスを入力して下さい"
       />
     </div>
     <div class="form-group">
@@ -53,9 +51,9 @@
     </div>
     <div class="submit-button-wrapper">
       <input
-        @click="submitUser"
+        @click="updateUser"
         type="submit"
-        value="送信"
+        value="更新"
         name="submitBtn"
         class="btn btn-submit"
         id="submitBtn"
@@ -86,28 +84,42 @@ export default {
     };
   },
   props: ["user_type"],
+  mounted() {
+    if (this.$store.state.userInfo.currentUser) {
+      return (
+        (this.user.name = this.$store.state.userInfo.currentUser.name),
+        (this.user.email = this.$store.state.userInfo.currentUser.email)
+      );
+    }
+  },
   methods: {
-    submitUser() {
+    passwordRefresh() {
+      (this.user.password = ""), (this.user.password_confirmation = "");
+    },
+    updateUser() {
       axios
-        .post("/api/users", { user: this.user })
+        .patch(`/api/users/${this.$route.params.id}`, {
+          user: this.user,
+        })
         .then((response) => {
+          this.passwordRefresh();
           console.log(response);
-          const createdUser = response.data.user;
+          const updatedUser = response.data.user;
+          console.log(updatedUser);
           this.$store.dispatch("flashMessage/catchMessage", {
             message: response.data.message,
             timeout: 5000,
           });
-          this.$store.dispatch("userInfo/changeLogin", createdUser);
-          this.$router.push({
-            name: "teachers_user_show_path",
-            params: { id: createdUser.id },
-          });
+          this.$store.dispatch("userInfo/updateUser", updatedUser);
         })
         .catch((error) => {
+          this.passwordRefresh();
           console.error(error);
-          if (error.response.data && error.response.data.errors) {
-            this.errors = error.response.data.errors;
-          }
+          console.log(error.response);
+          this.$store.dispatch("flashMessage/catchMessage", {
+            message: error.response.data.message,
+            timeout: 5000,
+          });
         });
     },
   },

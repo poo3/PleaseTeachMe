@@ -52,12 +52,15 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
-    if @user.update(user_params)
-      flash[:success] = 'プロフィール更新しました！'
-      redirect_to @user
+    user = User.find(params[:id])
+    if user.update(user_params)
+      render json: {
+               user: safe_user(user),
+               message: '情報を更新しました！！',
+             },
+             status: :ok
     else
-      render 'edit'
+      render json: { message: '編集に失敗しました' }, status: :bad_request
     end
   end
 
