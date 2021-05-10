@@ -13,16 +13,22 @@ require("custom/contact");
 
 import "@fortawesome/fontawesome-free/js/all";
 
-import Vue from "vue/dist/vue.esm";
+import Vue from "vue";
 import App from "../app";
 import router from "./router";
 import store from "../store";
+import Vuetify from "vuetify"; // 追加
+import "vuetify/dist/vuetify.min.css"; // 追加
+
+Vue.use(Vuetify);
+const vuetify = new Vuetify();
 
 document.addEventListener("DOMContentLoaded", () => {
   const app = new Vue({
     el: "#app",
     router: router,
     store: store,
+    vuetify,
     render: (h) => h(App),
   });
 });
