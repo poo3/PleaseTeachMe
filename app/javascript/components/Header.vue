@@ -14,7 +14,49 @@
           <router-link :to="{ name: `contact_path` }">お問い合わせ</router-link>
         </div>
       </div>
-      <div class="nav-usermenu">
+      <v-menu transition="scroll-y-transition">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="secondary"
+            class="ma-2 rounded-pill"
+            v-bind="attrs"
+            v-on="on"
+          >
+            メニュー
+          </v-btn>
+        </template>
+        <v-list>
+          <!-- <v-list-item v-for="n in 5" :key="n" link>
+            <v-list-item-title v-text="'Item ' + n"></v-list-item-title>
+          </v-list-item> -->
+          <router-link :to="{ name: `entrance_path` }" tag="li" v-if="!loggedIn"
+            >ログイン</router-link
+          >
+          <router-link
+            :to="{
+              name: `${currentUserType}s_user_show_path`,
+              params: { id: currentUserId },
+            }"
+            tag="li"
+            v-if="loggedIn"
+            >マイページ</router-link
+          >
+          <router-link
+            :to="{
+              name: `teachers_user_edit_path`,
+              params: { id: currentUserId },
+            }"
+            tag="li"
+            v-if="loggedIn"
+            >登録内容編集</router-link
+          >
+          <router-link :to="{ name: `register_path` }" tag="li"
+            >新規登録</router-link
+          >
+          <li @click="logout" v-if="loggedIn">ログアウト</li>
+        </v-list>
+      </v-menu>
+      <!-- <div class="nav-usermenu">
         <img
           src="~user-menu-logo.png"
           alt="user-menu-logo-img"
@@ -52,7 +94,7 @@
             <li @click="logout" v-if="loggedIn">ログアウト</li>
           </ul>
         </div>
-      </div>
+      </div> -->
     </nav>
   </header>
 </template>
