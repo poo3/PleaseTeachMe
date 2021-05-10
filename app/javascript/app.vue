@@ -1,10 +1,10 @@
 <template>
-  <div @click="usermenuClose">
+  <v-app id="app" @click="usermenuClose">
     <Header ref="header"></Header>
     <Message></Message>
     <router-view></router-view>
     <Footer></Footer>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -25,6 +25,7 @@ export default {
   methods: {
     // usermenuToggle
     usermenuClose(element) {
+      console.log("click!");
       if (element.target.className !== "nav-usermenu") {
         //ここにusermenu以外をクリックしたときの処理
         if (this.$refs.header.usermenuActivated) {
