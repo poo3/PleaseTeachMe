@@ -2,7 +2,7 @@
   <v-app id="app" @click="usermenuClose">
     <Header ref="header"></Header>
     <Message></Message>
-    <router-view></router-view>
+    <router-view id="main-contents"></router-view>
     <Footer></Footer>
   </v-app>
 </template>
@@ -40,6 +40,16 @@ export default {
 </script>
 
 <style scoped>
+#main-contents {
+  margin-top: 15vh;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15vh;
+}
 p {
   font-size: 2em;
   text-align: center;

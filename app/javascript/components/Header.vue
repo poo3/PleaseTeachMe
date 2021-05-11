@@ -14,56 +14,20 @@
           <router-link :to="{ name: `contact_path` }">お問い合わせ</router-link>
         </div>
       </div>
-      <v-menu transition="scroll-y-transition">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            color="secondary"
-            class="ma-2 rounded-pill"
-            v-bind="attrs"
-            v-on="on"
-          >
-            メニュー
-          </v-btn>
-        </template>
-        <v-list>
-          <!-- <v-list-item v-for="n in 5" :key="n" link>
-            <v-list-item-title v-text="'Item ' + n"></v-list-item-title>
-          </v-list-item> -->
-          <router-link :to="{ name: `entrance_path` }" tag="li" v-if="!loggedIn"
-            >ログイン</router-link
-          >
-          <router-link
-            :to="{
-              name: `${currentUserType}s_user_show_path`,
-              params: { id: currentUserId },
-            }"
-            tag="li"
-            v-if="loggedIn"
-            >マイページ</router-link
-          >
-          <router-link
-            :to="{
-              name: `teachers_user_edit_path`,
-              params: { id: currentUserId },
-            }"
-            tag="li"
-            v-if="loggedIn"
-            >登録内容編集</router-link
-          >
-          <router-link :to="{ name: `register_path` }" tag="li"
-            >新規登録</router-link
-          >
-          <li @click="logout" v-if="loggedIn">ログアウト</li>
-        </v-list>
-      </v-menu>
-      <!-- <div class="nav-usermenu">
-        <img
-          src="~user-menu-logo.png"
-          alt="user-menu-logo-img"
-          class="nav-usermenu"
-        />
-        <div class="usermenu-wrapper" v-show="usermenuActivated">
-          <ul>
+      <div class="text-center">
+        <v-menu
+          v-model="menu"
+          :close-on-content-click="false"
+          :nudge-width="150"
+          offset-x
+          left
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn color="#880016" dark v-bind="attrs" v-on="on">
+              メニュー
+            </v-btn>
+          </template>
+          <v-list>
             <router-link
               :to="{ name: `entrance_path` }"
               tag="li"
@@ -92,9 +56,9 @@
               >新規登録</router-link
             >
             <li @click="logout" v-if="loggedIn">ログアウト</li>
-          </ul>
-        </div>
-      </div> -->
+          </v-list>
+        </v-menu>
+      </div>
     </nav>
   </header>
 </template>
@@ -156,18 +120,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.v-menu__content {
+  > .v-list {
+    list-style: none;
+    width: 100%;
+    > li {
+      padding: 0.5rem 1rem;
+      width: 100%;
+      cursor: pointer;
+    }
+    > li:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+  }
+}
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-image: url("~PleaseTeachMe-background-home.png");
   background-repeat: no-repeat;
+  padding: 1rem 3rem;
+  width: 100%;
+  height: 100%;
   > .nav-application-logo {
     margin-left: 5rem;
   }
   > .nav-menu-wrapper {
     display: flex;
-    margin-right: 40rem;
+    justify-content: flex-start;
     > .nav-menu {
       margin: 0 5rem;
       > a {
@@ -212,6 +193,9 @@ nav {
         }
       }
     }
+  }
+  > .v-menu {
+    margin-right: 3rem;
   }
 }
 </style>
