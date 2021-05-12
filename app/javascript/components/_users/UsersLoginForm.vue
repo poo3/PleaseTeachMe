@@ -1,38 +1,28 @@
 <template>
   <div class="user-form-wrapper">
-    <div class="form-group">
-      <label for="userEmail">メールアドレス</label>
-      <input
-        type="email"
-        name="userEmail"
-        v-model="session.email"
-        class="form-control"
-        id="userEmail"
-        placeholder="メールアドレスを入力して下さい"
-      />
-    </div>
-    <div class="form-group">
-      <label for="userPassword">パスワード</label>
-      <input
-        type="password"
-        name="userPassword"
-        v-model="session.password"
-        class="form-control"
-        id="userPassword"
-        placeholder="パスワードを入力して下さい"
-      />
-    </div>
+    <form>
+      <v-text-field
+        v-model="email"
+        :error-messages="emailErrors"
+        label="E-mail"
+        required
+        @input="$v.email.$touch()"
+        @blur="$v.email.$touch()"
+        class="login-text-field"
+      ></v-text-field>
+      <v-text-field
+        v-model="password"
+        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+        :rules="[rules.required, rules.min]"
+        :type="show1 ? 'text' : 'password'"
+        name="input-10-1"
+        label="パスワード"
+        counter
+        @click:append="show1 = !show1"
+      ></v-text-field>
 
-    <div class="login-button-wrapper">
-      <input
-        @click="submitUser"
-        type="submit"
-        value="ログイン"
-        name="loginBtn"
-        class="btn btn-login"
-        id="loginBtn"
-      />
-    </div>
+      <v-btn class="mr-4" @click="submitUser">ログイン</v-btn>
+    </form>
   </div>
 </template>
 
@@ -44,20 +34,49 @@ axios.defaults.headers.common = {
     .querySelector('meta[name="csrf-token"]')
     .getAttribute("content"),
 };
+// validationのためにインポート
+// import { validationMixin } from "vuelidate";
+import { required, email } from "vuelidate/lib/validators";
+
 export default {
+  validations: {
+    email: { required, email },
+  },
   data() {
     return {
       error: false,
-      session: {
-        email: "",
-        password: "",
+      email: "",
+      password: "",
+      rules: {
+        required: (value) => !!value || "パスワードを入力してください",
+        min: (v) => v.length >= 8 || "８文字以上入力してください",
+        emailMatch: () => `The email and password you entered don't match`,
       },
+      show1: false,
     };
+  },
+  computed: {
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.email.$dirty) return errors;
+      !this.$v.email.email && errors.push("無効なメールアドレスです");
+      !this.$v.email.required &&
+        errors.push("メールアドレスを入力してください");
+      return errors;
+    },
+    sessionEmail() {
+      return this.email;
+    },
+    sessionPassword() {
+      return this.password;
+    },
   },
   methods: {
     submitUser() {
       axios
-        .post("/api/login", this.session)
+        .post("/api/login", {
+          session: { email: this.email, password: this.password },
+        })
         .then((response) => {
           console.log(response);
           const loggedinUser = response.data.user;
@@ -84,6 +103,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+form {
+  width: 40%;
+  margin: 2rem auto;
+  text-align: center;
+  > v-btn {
+    margin: 1rem auto;
+  }
+  > .login-text-field {
+    margin: 1rem 0;
+  }
+}
+
 .user-form-wrapper {
   > .error {
     margin: 3rem 0;
