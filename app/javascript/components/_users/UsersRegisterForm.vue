@@ -1,71 +1,66 @@
 <template>
   <div class="user-form-wrapper">
-    <div v-if="errors.length != 0">
-      <ul v-for="e in errors" :key="e">
-        <li class="vlidate-message">
-          {{ e }}
-        </li>
-      </ul>
-    </div>
-    <div class="form-group">
-      <label for="userName">名前</label>
-      <input
-        type="text"
-        name="userName"
-        v-model="user.name"
-        class="form-control"
-        id="userName"
-        placeholder="名前を入力して下さい"
-      />
-    </div>
-    <div class="form-group">
-      <label for="userEmail">メールアドレス</label>
-      <input
-        type="email"
-        name="userEmail"
-        v-model="user.email"
-        class="form-control"
-        id="userEmail"
-        placeholder="メールアドレスを入力して下さい"
-      />
-    </div>
-    <div class="form-group">
-      <label for="userPassword">パスワード</label>
-      <input
-        type="password"
-        name="userPassword"
-        v-model="user.password"
-        class="form-control"
-        id="userPassword"
-        placeholder="パスワードを入力して下さい"
-      />
-    </div>
-    <div class="form-group">
-      <label for="userPasswordConfirmation">パスワードの確認</label>
-      <input
-        type="password"
-        name="userPasswordConfirmation"
-        v-model="user.password_confirmation"
-        class="form-control"
-        id="userPasswordConfirmation"
-        placeholder="再度パスワード入力して下さい"
-      />
-    </div>
-    <div class="submit-button-wrapper">
-      <input
-        @click="submitUser"
-        type="submit"
-        value="送信"
-        name="submitBtn"
-        class="btn btn-submit"
-        id="submitBtn"
-      />
-    </div>
+    <form>
+      <v-text-field
+        v-model="name"
+        :error-messages="nameErrors"
+        label="Name"
+        required
+        @input="$v.name.$touch()"
+        @blur="$v.name.$touch()"
+        class="register-text-field"
+        counter
+      ></v-text-field>
+      <v-text-field
+        v-model="email"
+        :error-messages="emailErrors"
+        label="E-mail"
+        required
+        @input="$v.email.$touch()"
+        @blur="$v.email.$touch()"
+        class="register-text-field"
+      ></v-text-field>
+      <v-text-field
+        v-model="password"
+        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+        :error-messages="passwordErrors"
+        :type="show1 ? 'text' : 'password'"
+        @input="$v.password.$touch()"
+        @blur="$v.password.$touch()"
+        name="input-10-1"
+        label="パスワード"
+        counter
+        @click:append="show1 = !show1"
+        class="register-text-field"
+      ></v-text-field>
+      <v-text-field
+        v-model="password_confirmation"
+        :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="show2 ? 'text' : 'password'"
+        :error-messages="password_confirmationErrors"
+        name="input-10-1"
+        label="パスワードの確認"
+        counter
+        @input="$v.password_confirmation.$touch()"
+        @blur="$v.password_confirmation.$touch()"
+        @click:append="show2 = !show2"
+        class="register-text-field"
+      ></v-text-field>
+
+      <v-btn class="mr-4" @click="submitUser">新規登録</v-btn>
+    </form>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import {
+  required,
+  email,
+  maxLength,
+  minLength,
+  sameAs,
+} from "vuelidate/lib/validators";
 axios.defaults.headers.common = {
   "X-Requested-With": "XMLHttpRequest",
   "X-CSRF-TOKEN": document
@@ -73,23 +68,70 @@ axios.defaults.headers.common = {
     .getAttribute("content"),
 };
 export default {
+  validations: {
+    name: { required, maxLength: maxLength(50) },
+    email: { required, email },
+    password: { required, minLength: minLength(8) },
+    password_confirmation: { required, sameAsPassword: sameAs(`password`) },
+  },
   data() {
     return {
       errors: "",
-      user: {
-        name: "",
-        email: "",
-        password: "",
-        password_confirmation: "",
-        user_type: this.user_type,
-      },
+      name: "",
+      email: "",
+      password: "",
+      password_confirmation: "",
+      user_type: this.user_type,
+      show1: false,
+      show2: false,
     };
   },
   props: ["user_type"],
+  computed: {
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.email.$dirty) return errors;
+      !this.$v.email.email && errors.push("無効なメールアドレスです");
+      !this.$v.email.required &&
+        errors.push("メールアドレスを入力してください");
+      return errors;
+    },
+    nameErrors() {
+      const errors = [];
+      if (!this.$v.name.$dirty) return errors;
+      !this.$v.name.maxLength &&
+        errors.push("50文字以内のユーザ名にしてください");
+      !this.$v.name.required && errors.push("ユーザ名を入力してください");
+      return errors;
+    },
+    passwordErrors() {
+      const errors = [];
+      if (!this.$v.password.$dirty) return errors;
+      !this.$v.password.minLength &&
+        errors.push("半角英数字8文字以上のパスワードにしてください");
+      !this.$v.password.required && errors.push("パスワードを入力してください");
+      return errors;
+    },
+    password_confirmationErrors() {
+      const errors = [];
+      if (!this.$v.password_confirmation.$dirty) return errors;
+      !this.$v.password_confirmation.sameAsPassword &&
+        errors.push("パスワードが一致しません");
+      return errors;
+    },
+  },
   methods: {
     submitUser() {
       axios
-        .post("/api/users", { user: this.user })
+        .post("/api/users", {
+          user: {
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            password_confirmation: this.password_confirmation,
+            user_type: this.user_type,
+          },
+        })
         .then((response) => {
           console.log(response);
           const createdUser = response.data.user;
@@ -115,6 +157,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+form {
+  width: 40%;
+  margin: 2rem auto;
+  text-align: center;
+  > v-btn {
+    margin: 1rem auto;
+  }
+  > .register-text-field {
+    margin: 1rem 0;
+  }
+}
+
 .vlidate-message {
   color: red;
   text-align: center;
