@@ -19,7 +19,10 @@ import router from "./router";
 import store from "../store";
 import Vuetify from "vuetify"; // 追加
 import "vuetify/dist/vuetify.min.css"; // 追加
+// For validate
+import Vuelidate from "vuelidate";
 
+Vue.use(Vuelidate);
 Vue.use(Vuetify);
 const vuetify = new Vuetify();
 
