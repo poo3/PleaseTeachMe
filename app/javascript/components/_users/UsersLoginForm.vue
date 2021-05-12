@@ -13,12 +13,15 @@
       <v-text-field
         v-model="password"
         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-        :rules="[rules.required, rules.min]"
+        :error-messages="passwordErrors"
         :type="show1 ? 'text' : 'password'"
+        @input="$v.password.$touch()"
+        @blur="$v.password.$touch()"
         name="input-10-1"
         label="パスワード"
         counter
         @click:append="show1 = !show1"
+        class="register-text-field"
       ></v-text-field>
 
       <v-btn class="mr-4" @click="submitUser">ログイン</v-btn>
@@ -35,23 +38,18 @@ axios.defaults.headers.common = {
     .getAttribute("content"),
 };
 // validationのためにインポート
-// import { validationMixin } from "vuelidate";
-import { required, email } from "vuelidate/lib/validators";
+import { required, email, minLength } from "vuelidate/lib/validators";
 
 export default {
   validations: {
     email: { required, email },
+    password: { required, minLength: minLength(8) },
   },
   data() {
     return {
       error: false,
       email: "",
       password: "",
-      rules: {
-        required: (value) => !!value || "パスワードを入力してください",
-        min: (v) => v.length >= 8 || "８文字以上入力してください",
-        emailMatch: () => `The email and password you entered don't match`,
-      },
       show1: false,
     };
   },
@@ -64,11 +62,13 @@ export default {
         errors.push("メールアドレスを入力してください");
       return errors;
     },
-    sessionEmail() {
-      return this.email;
-    },
-    sessionPassword() {
-      return this.password;
+    passwordErrors() {
+      const errors = [];
+      if (!this.$v.password.$dirty) return errors;
+      !this.$v.password.minLength &&
+        errors.push("半角英数字8文字以上のパスワードにしてください");
+      !this.$v.password.required && errors.push("パスワードを入力してください");
+      return errors;
     },
   },
   methods: {
