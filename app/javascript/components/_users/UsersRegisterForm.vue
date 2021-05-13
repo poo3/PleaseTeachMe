@@ -47,7 +47,12 @@
         class="register-text-field"
       ></v-text-field>
 
-      <v-btn class="mr-4" @click="submitUser">新規登録</v-btn>
+      <v-btn
+        class="mr-4"
+        @click="submitUser"
+        :disabled="submitStatus === 'PENDING'"
+        >新規登録</v-btn
+      >
     </form>
   </div>
 </template>
@@ -84,6 +89,7 @@ export default {
       user_type: this.user_type,
       show1: false,
       show2: false,
+      submitStatus: null,
     };
   },
   props: ["user_type"],
@@ -122,35 +128,48 @@ export default {
   },
   methods: {
     submitUser() {
-      axios
-        .post("/api/users", {
-          user: {
-            name: this.name,
-            email: this.email,
-            password: this.password,
-            password_confirmation: this.password_confirmation,
-            user_type: this.user_type,
-          },
-        })
-        .then((response) => {
-          console.log(response);
-          const createdUser = response.data.user;
-          this.$store.dispatch("flashMessage/catchMessage", {
-            message: response.data.message,
-            timeout: 5000,
+      console.log("submit!");
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        console.log("invalid field value");
+        this.submitStatus = "ERROR";
+      } else {
+        console.log("valid field value");
+        // do your submit logic here
+        axios
+          .post("/api/users", {
+            user: {
+              name: this.name,
+              email: this.email,
+              password: this.password,
+              password_confirmation: this.password_confirmation,
+              user_type: this.user_type,
+            },
+          })
+          .then((response) => {
+            console.log(response);
+            const createdUser = response.data.user;
+            this.$store.dispatch("flashMessage/catchMessage", {
+              message: response.data.message,
+              timeout: 5000,
+            });
+            this.$store.dispatch("userInfo/changeLogin", createdUser);
+            this.$router.push({
+              name: "teachers_user_show_path",
+              params: { id: createdUser.id },
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+            if (error.response.data && error.response.data.errors) {
+              this.errors = error.response.data.errors;
+            }
           });
-          this.$store.dispatch("userInfo/changeLogin", createdUser);
-          this.$router.push({
-            name: "teachers_user_show_path",
-            params: { id: createdUser.id },
-          });
-        })
-        .catch((error) => {
-          console.error(error);
-          if (error.response.data && error.response.data.errors) {
-            this.errors = error.response.data.errors;
-          }
-        });
+        this.submitStatus = "PENDING";
+        setTimeout(() => {
+          this.submitStatus = "OK";
+        }, 500);
+      }
     },
   },
 };
