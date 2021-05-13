@@ -1,5 +1,12 @@
 <template>
   <div class="user-form-wrapper">
+    <div v-if="errors.length != 0">
+      <ul v-for="e in errors" :key="e">
+        <li class="vlidate-message">
+          {{ e }}
+        </li>
+      </ul>
+    </div>
     <form>
       <v-text-field
         v-model="email"
@@ -52,6 +59,7 @@ export default {
   },
   data() {
     return {
+      errors: "",
       error: false,
       email: "",
       password: "",
