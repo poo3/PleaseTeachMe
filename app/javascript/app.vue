@@ -1,9 +1,9 @@
 <template>
   <v-app id="app" @click="usermenuClose">
-    <Header ref="header"></Header>
-    <Message></Message>
+    <Header ref="header" id="header"></Header>
+    <Message id="flash-message"></Message>
     <router-view id="main-contents"></router-view>
-    <Footer></Footer>
+    <Footer id="footer"></Footer>
   </v-app>
 </template>
 
@@ -40,15 +40,23 @@ export default {
 </script>
 
 <style scoped>
+#flash-message {
+  position: fixed;
+  top: 15vh;
+  width: 100%;
+  background-color: whitesmoke;
+}
 #main-contents {
+  padding-top: 3vh;
   margin-top: 15vh;
 }
-header {
+#header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 15vh;
+  margin-bottom: 15vh;
 }
 p {
   font-size: 2em;
