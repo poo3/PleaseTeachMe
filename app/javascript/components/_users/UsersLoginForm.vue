@@ -24,7 +24,12 @@
         class="register-text-field"
       ></v-text-field>
 
-      <v-btn class="mr-4" @click="submitUser">ログイン</v-btn>
+      <v-btn
+        class="mr-4"
+        @click="submitUser"
+        :disabled="submitStatus === 'PENDING'"
+        >ログイン</v-btn
+      >
     </form>
   </div>
 </template>
@@ -51,6 +56,7 @@ export default {
       email: "",
       password: "",
       show1: false,
+      submitStatus: null,
     };
   },
   computed: {
@@ -73,30 +79,43 @@ export default {
   },
   methods: {
     submitUser() {
-      axios
-        .post("/api/login", {
-          session: { email: this.email, password: this.password },
-        })
-        .then((response) => {
-          console.log(response);
-          const loggedinUser = response.data.user;
-          this.$store.dispatch("flashMessage/catchMessage", {
-            message: response.data.message,
-            timeout: 5000,
+      console.log("submit!");
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        console.log("invalid field value");
+        this.submitStatus = "ERROR";
+      } else {
+        // do your submit logic here
+        console.log("valida field value");
+        axios
+          .post("/api/login", {
+            session: { email: this.email, password: this.password },
+          })
+          .then((response) => {
+            console.log(response);
+            const loggedinUser = response.data.user;
+            this.$store.dispatch("flashMessage/catchMessage", {
+              message: response.data.message,
+              timeout: 5000,
+            });
+            this.$store.dispatch("userInfo/changeLogin", loggedinUser);
+            this.$router.push({
+              name: "teachers_user_show_path",
+              params: { id: loggedinUser.id },
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+            this.$store.dispatch("flashMessage/catchMessage", {
+              message: error.response.data.message,
+              timeout: 5000,
+            });
           });
-          this.$store.dispatch("userInfo/changeLogin", loggedinUser);
-          this.$router.push({
-            name: "teachers_user_show_path",
-            params: { id: loggedinUser.id },
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-          this.$store.dispatch("flashMessage/catchMessage", {
-            message: error.response.data.message,
-            timeout: 5000,
-          });
-        });
+        this.submitStatus = "PENDING";
+        setTimeout(() => {
+          this.submitStatus = "OK";
+        }, 500);
+      }
     },
   },
 };
