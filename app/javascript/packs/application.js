@@ -17,11 +17,15 @@ import Vue from "vue";
 import App from "../app";
 import router from "./router";
 import store from "../store";
+import axios from "axios";
+// axiosのCSRF対策用トークンを設定
+import VueAxiosPlugin from "./plugins/vue-axios"; // 追加
 import Vuetify from "vuetify"; // 追加
 import "vuetify/dist/vuetify.min.css"; // 追加
 // For validate
 import Vuelidate from "vuelidate";
 
+Vue.use(VueAxiosPlugin, { axios: axios }); // 追加
 Vue.use(Vuelidate);
 Vue.use(Vuetify);
 const vuetify = new Vuetify();

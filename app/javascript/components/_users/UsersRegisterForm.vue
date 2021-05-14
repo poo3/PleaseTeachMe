@@ -66,12 +66,6 @@ import {
   minLength,
   sameAs,
 } from "vuelidate/lib/validators";
-axios.defaults.headers.common = {
-  "X-Requested-With": "XMLHttpRequest",
-  "X-CSRF-TOKEN": document
-    .querySelector('meta[name="csrf-token"]')
-    .getAttribute("content"),
-};
 export default {
   validations: {
     name: { required, maxLength: maxLength(50) },

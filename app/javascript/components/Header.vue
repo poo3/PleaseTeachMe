@@ -68,12 +68,6 @@ import "please_teach_me.png";
 import "user-menu-logo.png";
 import "PleaseTeachMe-background-home.png";
 import axios from "axios";
-axios.defaults.headers.common = {
-  "X-Requested-With": "XMLHttpRequest",
-  "X-CSRF-TOKEN": document
-    .querySelector('meta[name="csrf-token"]')
-    .getAttribute("content"),
-};
 export default {
   data() {
     return { usermenuActivated: false };

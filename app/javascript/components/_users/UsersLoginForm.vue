@@ -43,12 +43,6 @@
 
 <script>
 import axios from "axios";
-axios.defaults.headers.common = {
-  "X-Requested-With": "XMLHttpRequest",
-  "X-CSRF-TOKEN": document
-    .querySelector('meta[name="csrf-token"]')
-    .getAttribute("content"),
-};
 // validationのためにインポート
 import { required, email, minLength } from "vuelidate/lib/validators";
 
