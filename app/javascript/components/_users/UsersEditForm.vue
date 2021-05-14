@@ -61,58 +61,6 @@
         >登録</v-btn
       >
     </form>
-    <!-- <div class="form-group">
-      <label for="userName">名前</label>
-      <input
-        type="text"
-        name="userName"
-        v-model="user.name"
-        class="form-control"
-        id="userName"
-      />
-    </div>
-    <div class="form-group">
-      <label for="userEmail">メールアドレス</label>
-      <input
-        type="email"
-        name="userEmail"
-        v-model="user.email"
-        class="form-control"
-        id="userEmail"
-      />
-    </div>
-    <div class="form-group">
-      <label for="userPassword">パスワード</label>
-      <input
-        type="password"
-        name="userPassword"
-        v-model="user.password"
-        class="form-control"
-        id="userPassword"
-        placeholder="パスワードを入力して下さい"
-      />
-    </div>
-    <div class="form-group">
-      <label for="userPasswordConfirmation">パスワードの確認</label>
-      <input
-        type="password"
-        name="userPasswordConfirmation"
-        v-model="user.password_confirmation"
-        class="form-control"
-        id="userPasswordConfirmation"
-        placeholder="再度パスワード入力して下さい"
-      />
-    </div>
-    <div class="submit-button-wrapper">
-      <input
-        @click="updateUser"
-        type="submit"
-        value="更新"
-        name="submitBtn"
-        class="btn btn-submit"
-        id="submitBtn"
-      />
-    </div> -->
   </div>
 </template>
 
