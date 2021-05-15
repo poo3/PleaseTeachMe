@@ -1,12 +1,16 @@
-class ContactController < ApplicationController
-  before_action :set_contact, only: [:show, :edit, :update, :destroy]
+class Api::ContactController < ApplicationController
+  # 拾えなかったExceptionが発生したら500 Internal server errorを応答する
+  rescue_from Exception, with: :render_status_500
+
+  # ActiveRecordのレコードが見つからなければ404 not foundを応答する
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+  before_action :set_contact, only: %i[show edit update destroy]
 
   def index
     @contacts = Contact.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @contact = Contact.new
@@ -17,23 +21,33 @@ class ContactController < ApplicationController
     if @contact.save
       ContactMailer.contact_mail(@contact).deliver
       ContactMailer.thanks_for_contacting(@contact).deliver
-      redirect_to new_contact_path,notice: 'お問い合わせ内容送信しました！'
+      render json: {
+               contact: @contact,
+               message: 'お問い合わせ内容送信しました！',
+             },
+             status: :created
     else
-      render 'new'
+      render json: {
+               message: 'お問い合わせの送信に失敗しました！',
+             },
+             status: :unprocessable_entity
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
+        format.html do
+          redirect_to @contact, notice: 'Contact was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @contact }
       else
         format.html { render :edit }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @contact.errors, status: :unprocessable_entity
+        end
       end
     end
   end
@@ -41,19 +55,31 @@ class ContactController < ApplicationController
   def destroy
     @contact.destroy
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
+      format.html do
+        redirect_to contacts_url, notice: 'Contact was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_contact
-      @contact = Contact.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def contact_params
-      params.require(:contact).permit(:name, :email, :content)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_contact
+    @contact = Contact.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def contact_params
+    params.require(:contact).permit(:name, :email, :content)
+  end
+
+  # 例外発生時に実行するメソッド
+  def render_not_found
+    render json: {}, status: :not_found
+  end
+
+  def render_status_500
+    render json: {}, status: :internal_server_error
+  end
 end
