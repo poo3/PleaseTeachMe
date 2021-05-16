@@ -4,7 +4,7 @@ Rails
   .draw do
     namespace :api do
       resources :users
-      resources :contact
+      resources :contacts
       post '/login', to: 'sessions#create'
       delete '/logout', to: 'sessions#destroy'
       post '/auth_conf', to: 'sessions#auth_conf'
