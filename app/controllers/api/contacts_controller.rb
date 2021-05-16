@@ -1,4 +1,4 @@
-class Api::ContactController < ApplicationController
+class Api::ContactsController < ApplicationController
   # 拾えなかったExceptionが発生したら500 Internal server errorを応答する
   rescue_from Exception, with: :render_status_500
 

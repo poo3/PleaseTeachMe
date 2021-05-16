@@ -101,7 +101,7 @@ export default {
         console.log("valid field value");
         // do your submit logic here
         axios
-          .post("/api/contact", {
+          .post("/api/contacts", {
             contact: {
               name: this.name,
               email: this.email,
