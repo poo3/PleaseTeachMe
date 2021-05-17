@@ -102,7 +102,7 @@ export default {
             });
             this.$store.dispatch("userInfo/changeLogin", loggedinUser);
             this.$router.push({
-              name: "teachers_user_show_path",
+              name: `${loggedinUser.user_type}s_user_show_path`,
               params: { id: loggedinUser.id },
             });
           })
