@@ -1,10 +1,4 @@
 class Api::SessionsController < ApplicationController
-  # 拾えなかったExceptionが発生したら500 Internal server errorを応答する
-  rescue_from Exception, with: :render_status_500
-
-  # ActiveRecordのレコードが見つからなければ404 not foundを応答する
-  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-
   def new; end
 
   def auth_conf
@@ -51,15 +45,4 @@ class Api::SessionsController < ApplicationController
     render json: { message: 'ログアウトしました' }
     # redirect_to root_url
   end
-
-  private
-
-  def render_not_found
-    render json: {}, status: :not_found
-  end
-
-  def render_status_500
-    render json: {}, status: :internal_server_error
-  end
-
 end
