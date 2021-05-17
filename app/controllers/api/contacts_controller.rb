@@ -1,9 +1,4 @@
 class Api::ContactsController < ApplicationController
-  # 拾えなかったExceptionが発生したら500 Internal server errorを応答する
-  rescue_from Exception, with: :render_status_500
-
-  # ActiveRecordのレコードが見つからなければ404 not foundを応答する
-  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   before_action :set_contact, only: %i[show edit update destroy]
 
   def index
@@ -72,14 +67,5 @@ class Api::ContactsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def contact_params
     params.require(:contact).permit(:name, :email, :content)
-  end
-
-  # 例外発生時に実行するメソッド
-  def render_not_found
-    render json: {}, status: :not_found
-  end
-
-  def render_status_500
-    render json: {}, status: :internal_server_error
   end
 end
