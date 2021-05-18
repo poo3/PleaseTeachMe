@@ -67,7 +67,13 @@ RSpec.describe 'UsersApi', type: :request do
   describe 'PATCH`/api/users/${this.$route.params.id}`' do
     user = FactoryBot.create(:user)
     let(:session_params) do
-      { session: { email: user.email, password: user.password } }
+      {
+        session: {
+          email: user.email,
+          password: user.password,
+        },
+        user_type: user.user_type,
+      }
     end
     let(:valid_user_updated_params) do
       {

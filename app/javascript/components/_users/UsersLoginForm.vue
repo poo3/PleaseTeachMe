@@ -61,6 +61,7 @@ export default {
       submitStatus: null,
     };
   },
+  props: ["user_type"],
   computed: {
     emailErrors() {
       const errors = [];
@@ -92,6 +93,7 @@ export default {
         axios
           .post("/api/login", {
             session: { email: this.email, password: this.password },
+            user_type: this.user_type,
           })
           .then((response) => {
             console.log(response);
