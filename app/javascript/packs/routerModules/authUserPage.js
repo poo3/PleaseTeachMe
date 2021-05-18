@@ -20,6 +20,7 @@ export default [
         axios
           .post("/api/auth_conf", {
             id: to.params.id,
+            user_type: "student",
           })
           .then((response) => {
             next();
@@ -52,6 +53,7 @@ export default [
         axios
           .post("/api/auth_conf", {
             id: to.params.id,
+            user_type: "teacher",
           })
           .then((response) => {
             next();
@@ -84,6 +86,7 @@ export default [
         axios
           .post("/api/auth_conf", {
             id: to.params.id,
+            user_type: "teacher",
           })
           .then((response) => {
             next();
@@ -116,6 +119,7 @@ export default [
         axios
           .post("/api/auth_conf", {
             id: to.params.id,
+            user_type: "student",
           })
           .then((response) => {
             next();
