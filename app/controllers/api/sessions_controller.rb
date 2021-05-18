@@ -13,6 +13,15 @@ class Api::SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
 
+    # メールアドレスが登録されたものと違うとuserがnillになるので、、、
+    if user == nil
+      render json: {
+               message: 'ログインできませんでした正しい情報を入力してください',
+             },
+             status: :unauthorized
+      return
+    end
+
     # 登録されているuser_typeと合っているかどうかを検証する
     if user.user_type == params[:user_type]
       if user&.authenticate(params[:session][:password])
@@ -35,7 +44,7 @@ class Api::SessionsController < ApplicationController
       render json: {
                message: 'ログインできませんでした正しい情報を入力してください',
              },
-             status: :forbidden
+             status: :unauthorized
     end
   end
 
