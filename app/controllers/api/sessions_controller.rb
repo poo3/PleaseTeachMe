@@ -4,7 +4,11 @@ class Api::SessionsController < ApplicationController
   def auth_conf
     user = User.find(params[:id])
     if current_user?(user)
-      render json: {}, status: :ok
+      if user.user_type == params[:user_type]
+        render json: {}, status: :ok
+      else
+        render json: {}, status: :unauthorized
+      end
     else
       render json: {}, status: :unauthorized
     end

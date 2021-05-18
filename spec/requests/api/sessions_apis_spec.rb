@@ -73,18 +73,26 @@ RSpec.describe 'Api::SessionsApis', type: :request do
     end
     before { post '/api/login', params: session_params }
     it '認証に成功すること' do
-      post '/api/auth_conf', params: { id: user.id }
+      post '/api/auth_conf', params: { id: user.id, user_type: user.user_type }
       expect(response).to have_http_status(:ok)
     end
 
     it '認証に失敗すること(存在しないユーザIDとして実行)' do
-      post '/api/auth_conf', params: { id: unknown_user_id }
+      post '/api/auth_conf',
+           params: {
+             id: unknown_user_id,
+             user_type: another_user.user_type,
+           }
       expect(response).to have_http_status(:not_found)
     end
 
     it '認証に失敗すること（存在するユーザIDとして実行）' do
       post '/api/login', params: another_session_params
-      post '/api/auth_conf', params: { id: user.id }
+      post '/api/auth_conf',
+           params: {
+             id: user.id,
+             user_type: another_user.user_type,
+           }
       expect(response).to have_http_status(:unauthorized)
     end
   end

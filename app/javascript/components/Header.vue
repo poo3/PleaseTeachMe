@@ -45,7 +45,7 @@
             >
             <router-link
               :to="{
-                name: `teachers_user_edit_path`,
+                name: `${currentUserType}s_user_edit_path`,
                 params: { id: currentUserId },
               }"
               tag="li"
