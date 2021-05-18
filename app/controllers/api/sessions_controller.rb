@@ -12,20 +12,30 @@ class Api::SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
-    if user&.authenticate(params[:session][:password])
-      log_in user
 
-      # params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      render json: {
-               user: safe_user(user),
-               message: 'ログインに成功しました！',
-             },
-             status: :created
+    # 登録されているuser_typeと合っているかどうかを検証する
+    if user.user_type == params[:user_type]
+      if user&.authenticate(params[:session][:password])
+        log_in user
+
+        # params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+        render json: {
+                 user: safe_user(user),
+                 message: 'ログインに成功しました！',
+               },
+               status: :created
+      else
+        render json: {
+                 message:
+                   'ログインできませんでした正しい情報を入力してください',
+               },
+               status: :unprocessable_entity
+      end
     else
       render json: {
                message: 'ログインできませんでした正しい情報を入力してください',
              },
-             status: :unprocessable_entity
+             status: :forbidden
     end
   end
 
