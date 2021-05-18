@@ -6,7 +6,13 @@ RSpec.describe 'Api::SessionsApis', type: :request do
   describe 'POST /api/login' do
     user = FactoryBot.create(:user)
     let(:session_params) do
-      { session: { email: user.email, password: user.password } }
+      {
+        session: {
+          email: user.email,
+          password: user.password,
+        },
+        user_type: user.user_type,
+      }
     end
     it 'セッション作成が成功すること' do
       post '/api/login', params: session_params
@@ -25,42 +31,60 @@ RSpec.describe 'Api::SessionsApis', type: :request do
     end
 
     let(:invalid_session_params) do
-      { session: { email: 'invalid_email', password: 'invalid_password' } }
+      {
+        session: {
+          email: 'invalid_email@gmail.com',
+          password: 'invalid_password',
+        },
+        user_type: user.user_type,
+      }
     end
     it 'セッション作成が失敗すること' do
       post '/api/login', params: invalid_session_params
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unauthorized)
       json = JSON.parse(response.body)
       expect(json).to include('message')
     end
   end
-  
-  describe "POST /api/auth_conf" do
+
+  describe 'POST /api/auth_conf' do
     user = FactoryBot.create(:user)
     another_user = FactoryBot.create(:user)
-    let :unknown_user_id do 99999 end
+    let :unknown_user_id do
+      99_999
+    end
     let(:session_params) do
-      { session: { email: user.email, password: user.password } }
+      {
+        session: {
+          email: user.email,
+          password: user.password,
+        },
+        user_type: user.user_type,
+      }
     end
     let(:another_session_params) do
-      { session: { email: another_user.email, password: another_user.password } }
+      {
+        session: {
+          email: another_user.email,
+          password: another_user.password,
+        },
+        user_type: user.user_type,
+      }
     end
-    before do
-      post '/api/login', params: session_params
-    end
-    it "認証に成功すること" do
-      post '/api/auth_conf',params:{id: user.id}
+    before { post '/api/login', params: session_params }
+    it '認証に成功すること' do
+      post '/api/auth_conf', params: { id: user.id }
       expect(response).to have_http_status(:ok)
     end
 
-    it "認証に失敗すること(存在しないユーザIDとして実行)" do
-      post '/api/auth_conf',params:{id: unknown_user_id}
+    it '認証に失敗すること(存在しないユーザIDとして実行)' do
+      post '/api/auth_conf', params: { id: unknown_user_id }
       expect(response).to have_http_status(:not_found)
     end
 
-    it "認証に失敗すること（存在するユーザIDとして実行）" do
+    it '認証に失敗すること（存在するユーザIDとして実行）' do
       post '/api/login', params: another_session_params
-      post '/api/auth_conf',params:{id: user.id}
+      post '/api/auth_conf', params: { id: user.id }
       expect(response).to have_http_status(:unauthorized)
     end
   end
