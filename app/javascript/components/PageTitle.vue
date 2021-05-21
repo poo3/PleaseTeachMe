@@ -1,18 +1,24 @@
 <template>
   <div class="page-title">
-    <h1>{{ pageTitle }}</h1>
+    <h1 :style="textStyleObject">{{ pageTitle }}</h1>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["pageTitle"],
+  props: ["pageTitle", "textColor"],
+  data() {
+    return {
+      textStyleObject: {
+        color: this.textColor,
+      },
+    };
+  },
 };
 </script>
 
 <style scoped>
 h1 {
   font-size: 3rem;
-  color: whitesmoke;
 }
 </style>
