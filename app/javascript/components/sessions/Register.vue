@@ -1,6 +1,6 @@
 <template>
   <div class="register-wrapper">
-    <h1>新規登録</h1>
+    <page-title :pageTitle="pageTitle" :textColor="whitesmoke"></page-title>
     <div class="usertype-link-wrapper">
       <div class="teacher-link-wrapper">
         <router-link to="/teachers/new">
@@ -18,7 +18,18 @@
 
 <script>
 import "PleaseTeachMe-background-home.png";
-export default {};
+import PageTitle from "../PageTitle";
+export default {
+  data() {
+    return {
+      pageTitle: "新規登録",
+      whitesmoke: "whitesmoke",
+    };
+  },
+  components: {
+    PageTitle,
+  },
+};
 </script>
 
 <style lang="scss" scoped>
