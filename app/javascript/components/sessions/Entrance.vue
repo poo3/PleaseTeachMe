@@ -1,6 +1,6 @@
 <template>
   <div class="entrance-wrapper">
-    <h1>ログイン</h1>
+    <page-title :pageTitle="pageTitle" :textColor="whitesmoke"></page-title>
     <div class="usertype-link-wrapper">
       <div class="teacher-link-wrapper">
         <router-link to="/teachers/login">
@@ -18,7 +18,18 @@
 
 <script>
 import "PleaseTeachMe-background-home.png";
-export default {};
+import PageTitle from "../PageTitle.vue";
+export default {
+  data() {
+    return {
+      pageTitle: "ログイン",
+      whitesmoke: "whitesmoke",
+    };
+  },
+  components: {
+    PageTitle,
+  },
+};
 </script>
 
 <style lang="scss" scoped>
