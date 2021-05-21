@@ -1,6 +1,6 @@
 <template>
   <div class="helpwrapper">
-    <h1>Q＆A</h1>
+    <page-title :pageTitle="pageTitle" :textColor="black"></page-title>
     <v-expansion-panels>
       <v-expansion-panel v-for="(item, i) in 5" :key="i">
         <v-expansion-panel-header>{{
@@ -15,7 +15,9 @@
 </template>
 
 <script>
+import PageTitle from "../PageTitle.vue";
 export default {
+  components: { PageTitle },
   data() {
     return {
       listQuestionArray: [
@@ -26,6 +28,8 @@ export default {
         "Q5の質問です",
       ],
       listAnswerArray: ["1111", "2222", "3333", "4444", "5555"],
+      pageTitle: "Q&A",
+      black: "black",
     };
   },
 };

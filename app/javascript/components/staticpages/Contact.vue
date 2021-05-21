@@ -1,6 +1,6 @@
 <template>
   <div class="contact-page-wrapper">
-    <h1>お問い合わせフォーム</h1>
+    <page-title :pageTitle="pageTitle" :textColor="black"></page-title>
     <div class="contact-form-wrapper">
       <form>
         <v-text-field
@@ -46,7 +46,9 @@
 <script>
 import axios from "axios";
 import { required, email, maxLength } from "vuelidate/lib/validators";
+import PageTitle from "../PageTitle.vue";
 export default {
+  components: { PageTitle },
   validations: {
     name: { required, maxLength: maxLength(20) },
     email: { required, email },
@@ -58,6 +60,8 @@ export default {
       email: "",
       content: "",
       submitStatus: null,
+      pageTitle: "お問い合わせ",
+      black: "black",
     };
   },
   computed: {
